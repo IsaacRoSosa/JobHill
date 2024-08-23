@@ -1,0 +1,66 @@
+"use client";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import styles from "@/styles/SideBar.module.css";
+import { usePathname } from "next/navigation";
+
+export default function SideBar() {
+  const [isOpen, setIsOpen] = useState(false); // Establecer un valor inicial seguro
+  const pathname = usePathname();
+
+  // Ajustar el estado de `isOpen` solo en el cliente después de que el componente se haya montado
+  useEffect(() => {
+    const savedState = localStorage.getItem("sidebarState");
+    if (savedState !== null) {
+      setIsOpen(JSON.parse(savedState));
+    }
+  }, []);
+
+  const toggleSidebar = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    // Guardar el estado en localStorage
+    localStorage.setItem("sidebarState", JSON.stringify(newState));
+  };
+
+  const menuItems = [
+    { name: "Jobs", icon: "/Images/sidebar/Jobs.png", route: "/jobs" },
+    { name: "My Applications", icon: "/Images/sidebar/Applications.png", route: "/applications" },
+    { name: "Friends", icon: "/Images/sidebar/Friends.png", route: "/friends" },
+    { name: "News", icon: "/Images/sidebar/news.png", route: "/news" },
+  ];
+
+  return (
+    <div className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
+      <div className={styles.logoContainer}>
+        <Image src="/Images/sidebar/Jobmiga_logo.png" alt="Jobmiga Logo" width={isOpen ? 100 : 80} height={isOpen ? 100 : 80} />
+        {isOpen && <h1>JOBHILL</h1>}
+        <button className={styles.toggleButton} onClick={toggleSidebar}>
+          <Image src="/Images/sidebar/menuIcon.png" alt="Toggle Menu" width={100} height={100} />
+        </button>
+      </div>
+      <ul className={styles.menu}>
+        {menuItems.map((item) => (
+          <li key={item.name} className={`${item.route === pathname ? styles.active : ""} ${isOpen ? styles.openMenuItem : styles.closedMenuItem}`}>
+            <a href={item.route}>
+              <Image src={item.icon} alt={`${item.name} Icon`} width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} />
+              {isOpen && <span className={styles.menuItemText}>{item.name}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div className={`${styles.profile} ${isOpen ? styles.profileOpen : styles.profileClosed}`}>
+        <Image className={styles.pfp} src="/Images/sidebar/pfp_template.png" alt="Profile Picture" width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} />
+        {isOpen && (
+          <div className={styles.profileInfo}>
+            <p className={styles.username}>Santiago Sauma</p>
+            <p className={styles.role}>Estudiante</p>
+          </div>
+        )}
+        <a href="/logout" className={styles.logout}>
+          <Image src="/Images/sidebar/logout.png" alt="Logout" width={30} height={30} />
+        </a>
+      </div>
+    </div>
+  );
+}
