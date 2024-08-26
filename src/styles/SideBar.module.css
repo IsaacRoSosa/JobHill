@@ -123,6 +123,8 @@
 .logout {
   margin-top: 10px; /* Añade un margen superior para separar el icono de cierre de sesión del perfil */
   cursor: pointer;
+  background-color: #1F3144;
+  border: none;
 }
 
 .logout:hover {

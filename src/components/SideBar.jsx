@@ -1,8 +1,9 @@
-"use client";
+
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "@/styles/SideBar.module.css";
 import { usePathname } from "next/navigation";
+import LogOut from "@/components/LogOut";
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false); // Establecer un valor inicial seguro
@@ -57,9 +58,11 @@ export default function SideBar() {
             <p className={styles.role}>Estudiante</p>
           </div>
         )}
-        <a href="/logout" className={styles.logout}>
-          <Image src="/Images/sidebar/logout.png" alt="Logout" width={30} height={30} />
-        </a>
+ 
+
+        <LogOut />
+
+
       </div>
     </div>
   );

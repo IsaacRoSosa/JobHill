@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 function page() {
   return (
-    <div>Applications</div>
+    <div>
+      
+      <h1>my apps</h1>
+      
+      </div>
   )
 }
 

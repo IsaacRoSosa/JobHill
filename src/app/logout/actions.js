@@ -15,6 +15,12 @@ export async function logout(formData) {
       redirect('/error')
     }
   
-    revalidatePath('/', 'layout')
-    redirect('/')
+    revalidatePath('/login')
+    revalidatePath('/applications')
+    revalidatePath('/jobs')
+    revalidatePath('/friends')
+    revalidatePath('/news')
+    revalidatePath('/')
+
+    redirect('/login')
   }

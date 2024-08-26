@@ -1,0 +1,75 @@
+.filterHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #E6EFF4;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.46);
+    gap: 10px;
+    height: 8vh;
+    position: sticky; /* Hacer que el header sea pegajoso */
+    top: 0; /* Pegarlo a la parte superior */
+    margin: 0;
+    z-index: 1000; /* Asegurarse de que esté por encima del contenido desplazable */
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filterGroup label {
+    font-size: 0.8rem;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.filterGroup input {
+    width: 120px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    font-size: 1rem;
+    color: #333;
+}
+
+.resetButton {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #F7E8CA;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.searchButton {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #001A33;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.resetButton:hover {
+    background-color: #F9DFA6;
+}
+
+.searchButton:hover {
+    background-color: #002B4F;
+}
+
+.jobGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 1rem;
+    height: calc(100vh - 8vh); /* Resta la altura del header */
+    overflow-y: auto; /* Permitir desplazamiento vertical */
+    padding: 1rem;
+}
