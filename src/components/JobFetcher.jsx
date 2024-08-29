@@ -22,7 +22,7 @@ export default async function JobFetcher() {
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
-    .limit(7);
+    .limit(21);
 
   if (error) {
     console.error('Error fetching job offers:', error);
