@@ -6,12 +6,11 @@
     display: flex;
     flex-direction: column;
     width: 60vh;
-    height: 30vh;
+    height: 33vh;
     border: 2px solid #000000;
-    
 }
 
-.companyImage{
+.companyImage {
     background-color: white;
     border-radius: 5px;
 }
@@ -22,28 +21,37 @@
     gap: 10px;
     margin-top: 0;
     margin-bottom: 0;
+    height: 40%;
+    width: 100%;
 }
 
 .titleContainer {
     display: flex;
     flex-direction: column;
+    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
 }
 
 .title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin: 0;
+    margin-top: 15px;
     color: black;
+    white-space: normal; /* Permitir que el texto se escriba en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
 }
 
 .companyName {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #6B6969;
     margin-top: 4px;
     font-weight: 600;
+    justify-self: flex-end;
 }
 
 .postedDays {
-    color: #85BF5A; /* Green color for days ago */
+    color: #6b33e5; /* Green color for days ago */
     font-size: 1.1rem;
 }
 
@@ -55,20 +63,22 @@
     width: 45vh;
 }
 
-.info{
-    margin-top: 10px;
+.info {
+    margin-top: 5px;
     margin-bottom: 5px;
     color: #003049;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.details{
+.details {
     display: flex;
     flex-direction: column;
     font-size: 1rem;
     width: 40vh;
     gap: 1px;
-
 }
 
 .actions {
@@ -103,6 +113,15 @@
     transform: scale(1.1);
 }
 
-.halfs{
+.halfs {
     display: flex;
+    background-color: aqua;
+    height: 60%;
+}
+
+.cardInfo {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

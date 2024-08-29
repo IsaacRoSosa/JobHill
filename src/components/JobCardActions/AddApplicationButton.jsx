@@ -1,6 +1,7 @@
 "use client";  // Para asegurarte de que se ejecute en el cliente
 
 import React from 'react';
+import styles from '@/styles/jobCard.module.css';
 
 function AddApplicationButton({ job }) {
     const handleAddApplicationClick = () => {
@@ -9,7 +10,7 @@ function AddApplicationButton({ job }) {
     };
 
     return (
-        <button onClick={handleAddApplicationClick}>
+        <button className={styles.addButton} onClick={handleAddApplicationClick}>
             Add Application
         </button>
     );

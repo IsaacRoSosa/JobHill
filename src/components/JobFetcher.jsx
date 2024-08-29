@@ -22,7 +22,7 @@ export default async function JobFetcher() {
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
-    .limit(5);
+    .limit(7);
 
   if (error) {
     console.error('Error fetching job offers:', error);
@@ -45,6 +45,9 @@ export default async function JobFetcher() {
       const monthsAgo = now.diff(createdAt, 'month');
       postedDays = `${monthsAgo} month${monthsAgo > 1 ? 's' : ''} ago`;
     }
+
+    const displayLocation = job.location.length > 4 ? 'Multiple Locations' : job.location.filter(loc => loc.length > 2).join(', ');
+
 
     return {
       companyLogo: job.companies.logo_url,
