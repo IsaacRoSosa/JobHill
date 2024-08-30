@@ -20,7 +20,7 @@ export async function GET(request) {
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
-    .limit(21);
+    .limit(100);
 
   if (error) {
     return new Response(JSON.stringify({ error: 'Failed to fetch jobs' }), { status: 500 });
@@ -39,8 +39,8 @@ export async function GET(request) {
       const weeksAgo = Math.floor(daysAgo / 7);
       postedDays = `${weeksAgo} week${weeksAgo > 1 ? 's' : ''} ago`;
     } else {
-      const monthsAgo = now.diff(createdAt, 'month');
-      postedDays = `${monthsAgo} month${monthsAgo > 1 ? 's' : ''} ago`;
+        const monthsAgo = Math.floor(daysAgo / 30);
+        postedDays = `${monthsAgo} month${monthsAgo > 1 ? 's' : ''} ago`;
     }
 
     const displayLocation = job.location.length > 4 ? 'Multiple Locations' : job.location.filter(loc => loc.length > 2).join(', ');

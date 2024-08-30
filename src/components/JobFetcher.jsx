@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/jobFetcher.module.css';
 import JobCard from '@/components/JobCard';
+import Loader from '@/components/Loader';
+
 
 // Estilos personalizados para los selectores generales
 const customStyles = {
@@ -129,6 +131,8 @@ export default function JobFetcher() {
     orderBy: { value: 'Descending', label: 'Newest First' },
   });
 
+  const [loading, setLoading] = useState(true);
+
   // Opciones para los selectores
   const modalityOptions = [
     { value: 'All', label: 'All' },
@@ -172,13 +176,16 @@ export default function JobFetcher() {
   // Fetch all jobs once when the component mounts
   useEffect(() => {
     const fetchJobs = async () => {
+      setLoading(true);
       try {
         const response = await fetch('/api/getJobs');
         const data = await response.json();
         setAllJobs(data); // Store all jobs
         setJobs(data); // Initially, display all jobs
+        setLoading(false);
       } catch (err) {
         console.error('Error fetching job offers:', err);
+        setLoading(false);
       }
     };
 
@@ -330,11 +337,15 @@ export default function JobFetcher() {
         <button className={styles.resetButton} onClick={resetFilters}>Reset</button>
       </div>
 
-      <div className={styles.jobGrid}>
-        {jobs.map((job, index) => (
-          <JobCard key={index} job={job} />
-        ))}
-      </div>
+      {loading ? (
+        <Loader className={styles.loader} /> // Show the loader while loading
+      ) : (
+        <div className={styles.jobGrid}>
+          {jobs.map((job, index) => (
+            <JobCard key={index} job={job} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
