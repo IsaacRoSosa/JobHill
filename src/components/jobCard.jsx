@@ -8,10 +8,6 @@ const JobCard = ({ job }) => {
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
 
-  // Shorten "Engineer" to "Eng" in categories
-  const shortenedCategories = job.categories.map(category =>
-    category.includes('Engineer') ? category.replace('Engineer', 'Eng') : category
-  ).join(', ');
 
   return (
     <div className={styles.card}>
@@ -39,13 +35,13 @@ const JobCard = ({ job }) => {
             ) : (
               <p className={styles.info}><Image src={modalityIcon} alt="Modality" width={18} height={18} /> {job.modality}</p>
             )}
-            <p className={styles.info}><Image src="/Images/jobCard/category.png" alt="Category" width={18} height={18} /> {shortenedCategories}</p>
+            <p className={styles.info}><Image src="/Images/jobCard/category.png" alt="Category" width={18} height={18} /> {job.categories}</p>
 
             <div className={styles.actions}>
               {hasPeriod ? (
                 <div>
                   <ApplyButton applicationLink={job.application_link} />
-                  <AddApplicationButton job={job} />
+                  <AddApplicationButton job={job.categories} />
                 </div>
               ) : (
                 <div></div>

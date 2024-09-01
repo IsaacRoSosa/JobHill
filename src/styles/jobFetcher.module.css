@@ -94,3 +94,64 @@
     overflow-y: auto; /* Permitir desplazamiento vertical */
     padding: 1rem;
 }
+
+.loaderCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    transition: 0.3s;
+    scale: 3;
+}
+
+@keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .loading {
+    font-size: 1.2rem;
+    color: #001A33;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 15px;
+    display: inline-block;
+  }
+  
+  .loading span {
+    display: inline-block;
+    animation: bounce 1s infinite;
+  }
+  
+  .loading span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .loading span:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  .loading span:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .loading span:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  
+  .loading span:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  
+  .loading span:nth-child(6) {
+    animation-delay: 0.5s;
+  }
+  
+  .loading span:nth-child(7) {
+    animation-delay: 0.6s;
+  }

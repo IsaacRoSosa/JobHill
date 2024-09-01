@@ -338,7 +338,19 @@ export default function JobFetcher() {
       </div>
 
       {loading ? (
-        <Loader className={styles.loader} /> // Show the loader while loading
+        <div className={styles.loaderCont}>
+                    <Loader className={styles.loader} /> 
+                    <div className={styles.loading}>
+                    <span>L</span>
+                    <span>o</span>
+                    <span>a</span>
+                    <span>d</span>
+                    <span>i</span>
+                    <span>n</span>
+                    <span>g</span>
+                  </div>
+
+        </div>
       ) : (
         <div className={styles.jobGrid}>
           {jobs.map((job, index) => (
