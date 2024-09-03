@@ -141,6 +141,11 @@ const AppFetcher = () => {
           <button className={styles.searchButton}>Create New</button>
         </div>
       </div>
+
+      <div className={styles.tableContainer}>
+
+
+      </div>
     </div>
   );
 };

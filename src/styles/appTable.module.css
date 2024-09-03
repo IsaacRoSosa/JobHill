@@ -1,0 +1,57 @@
+.tableContainer {
+    margin-top: 20px;
+}
+
+.applicationTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.applicationTable th, .applicationTable td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.applicationTable th {
+    background-color: #3A506B;
+    color: white;
+}
+
+.applicationTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.statusLabel {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.referralLabel {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #E6EFF4;
+    color: #333;
+}
+
+.timelineButton, .editButton {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.timelineButton {
+    background-color: #2684FF;
+    color: white;
+}
+
+.editButton {
+    background-color: #001A33;
+    color: white;
+}
