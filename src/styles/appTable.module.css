@@ -1,25 +1,68 @@
-.tableContainer {
-    margin-top: 20px;
-}
-
 .applicationTable {
     width: 100%;
     border-collapse: collapse;
 }
 
+.applicationTable tr th {
+    height: 5vh;
+    font-size: 1.3rem;
+}
+
 .applicationTable th, .applicationTable td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
+    padding: 10px 10px;
+    border: none; 
+    text-align: center;
+}
+
+.applicationTable th.role, .applicationTable td.role {
+    width: 150px; /* Set a fixed width for the role column */
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word; /* Break long words if necessary */
 }
 
 .applicationTable th {
-    background-color: #3A506B;
+    background-color: #1F314E;
     color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+.applicationTable td {
+    color: #001A33;
+    text-align: center;
+    padding: 10px;
+}
+
+.tableContainer {
+    margin-top: 20px;
+    font-family: 'Rounded Mplus 1c', sans-serif;
+}
+
+.applicationTable tr {
+    text-align: center;
+}
+
+.applicationTable td.company {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.applicationTable tr:first-child th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.applicationTable tr:first-child th:last-child {
+    border-top-right-radius: 15px;
 }
 
 .applicationTable tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #F5F3F3;
+}
+
+.applicationTable tr:nth-child(odd) {
+    background-color: #d1d1d1;
 }
 
 .statusLabel {
@@ -53,5 +96,45 @@
 
 .editButton {
     background-color: #001A33;
+    color: white;
+}
+
+/* Pagination styles */
+.tableFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    background-color: #D9D9D9;
+}
+
+.paginationInfo {
+    font-size: 1rem;
+    color: #333;
+}
+
+.paginationControls button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.paginationControls button.activePage {
+    background-color: #2684FF;
+    color: white;
+}
+
+.paginationControls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.paginationControls button:hover:not(:disabled) {
+    background-color: #2684FF;
     color: white;
 }

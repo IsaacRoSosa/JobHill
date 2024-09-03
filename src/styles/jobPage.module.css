@@ -5,15 +5,12 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-
 } 
 
 .jobContainer{
     height: 87vh;
     overflow-y: auto; /* Permitir desplazamiento vertical */
     overflow-x: hidden; /* Permitir desplazamiento vertical */
-
-
     margin-top: 0px;
 }
 
