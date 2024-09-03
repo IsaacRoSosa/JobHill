@@ -7,11 +7,12 @@
     flex-direction: column;
 } 
 
-.jobContainer{
+.appContainer{
     height: 87vh;
-    overflow-y: auto; /* Permitir desplazamiento vertical */
-
     margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header{
@@ -31,4 +32,12 @@
     padding: 1rem;
     font-family: 'Rounded Mplus 1c', sans-serif;
 
+}
+ 
+.contentCenter{
+    display: flex;
+    flex-direction: column;
+
+    width: 95%;
+    height: 100%;
 }
