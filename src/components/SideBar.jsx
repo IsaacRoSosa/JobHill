@@ -57,6 +57,7 @@ export default function SideBar() {
             <p className={styles.username}>Santiago Sauma</p>
             <p className={styles.role}>Estudiante</p>
           </div>
+       
         )}
  
 

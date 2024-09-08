@@ -1,0 +1,116 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #2c3b4e;
+}
+
+.codeBox {
+  background-color: #001A33;
+  color: #FFF;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  width: 80%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  white-space: pre-wrap;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loaderTitle, .loaderParagraph {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  width: fit-content; /* Ajustar al contenido */
+  margin: 0 auto; /* Centrar el contenedor */
+}
+
+.loaderTitle::after{
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: blink 0.75s step-end infinite;
+}
+
+.loaderTitle {
+  animation: typewriterTitle 3s steps(30) 1 normal forwards;
+}
+
+
+.loaderTitle::after {
+  animation: blink 0.75s step-end infinite, hideBlink 3s forwards;
+}
+
+.loaderText {
+  font-size: 40px;
+
+  background: #30FF0C;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content; /* Ajustar al contenido */
+}
+
+.loaderText2 {
+    font-size: 30px;
+    background: #30FF0C;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 100%;
+    white-space: normal; /* Permite que el texto se ajuste automáticamente */
+    word-wrap: break-word; /* Permite que las palabras largas se dividan */
+  }
+
+@keyframes typewriterTitle {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* El ancho será el del texto, no el div */
+  }
+}
+
+@keyframes typewriterParagraph {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* El ancho será el del texto, no el div */
+  }
+}
+
+@keyframes blink {
+  0% {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  100% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes hideBlink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.devImage {
+  width: 300px;
+  height: auto;
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
+}
