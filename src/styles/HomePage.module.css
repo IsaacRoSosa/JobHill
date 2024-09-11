@@ -28,7 +28,7 @@
       background-position: 0 0, 100% 100%; /* Comienza desde la posición original */
     }
     100% {
-      background-position: -100% -1000%, 0 0; /* Mueve la imagen diagonalmente */
+      background-position: -1000% -1000%, 0 0; /* Mueve la imagen diagonalmente */
     }
 
   }
