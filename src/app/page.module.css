@@ -6,6 +6,15 @@
   min-height: 100vh;
 }
 
+.header{
+  background-color: #003049;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -226,4 +235,84 @@
   to {
     transform: rotate(0deg);
   }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600&display=swap');
+
+.container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E6EFF4;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: url("/Images/company_logos_background.png"); /* Replace with your image */
+  background-repeat: repeat;
+  background-size: cover;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.6rem;
+  color: #001A33;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.2rem;
+  color: #001A33;
+  margin-bottom: 30px;
+}
+
+.signInButton {
+  background-color: #001A33;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.signInButton:hover {
+  background-color: #003366;
 }

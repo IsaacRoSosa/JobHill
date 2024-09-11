@@ -20,7 +20,7 @@ export async function GET(request) {
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
-    .limit(100);
+    .limit(500);
 
   if (error) {
     return new Response(JSON.stringify({ error: 'Failed to fetch jobs' }), { status: 500 });
