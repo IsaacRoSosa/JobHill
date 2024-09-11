@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #E6EFF4;
+  background-color: #e6eff4fd;
   overflow: hidden;
 }
 
@@ -21,6 +21,7 @@
     background-repeat: repeat; /* Asegura que se repita */
     background-size: cover; /* Ajusta para cubrir más área de la imagen */
     animation: moveBackground 260s linear infinite; /* Animación diagonal con mayor duración */
+    opacity: 0.7;
   }
   
   @keyframes moveBackground {
@@ -28,7 +29,7 @@
       background-position: 0 0, 100% 100%; /* Comienza desde la posición original */
     }
     100% {
-      background-position: -1000% -1000%, 0 0; /* Mueve la imagen diagonalmente */
+      background-position: -1500% -1500%, 0 0; /* Mueve la imagen diagonalmente */
     }
 
   }
