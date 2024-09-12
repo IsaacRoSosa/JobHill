@@ -354,6 +354,7 @@ export default function JobFetcher() {
       ) : (
         <div className={styles.jobGrid}>
           {jobs.map((job, index) => (
+            
             <JobCard key={index} job={job} />
           ))}
         </div>

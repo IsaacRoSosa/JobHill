@@ -4,12 +4,17 @@ import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
 
+
+
 const JobCard = ({ job }) => {
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
 
+  
+
 
   return (
+    
     <div className={styles.card}>
       <div className={styles.cardInfo}>
         <div className={styles.header}>
@@ -41,7 +46,7 @@ const JobCard = ({ job }) => {
               {hasPeriod ? (
                 <div>
                   <ApplyButton applicationLink={job.application_link} />
-                  <AddApplicationButton job={job.categories} />
+                  <AddApplicationButton job={job} />
                 </div>
               ) : (
                 <div></div>
@@ -54,7 +59,7 @@ const JobCard = ({ job }) => {
           {hasPeriod ? (
             <div></div>
           ) : (
-            <div className={styles.buttonBig}>
+            <div>
               <ApplyButton applicationLink={job.application_link} />
               <AddApplicationButton job={job} />
             </div>

@@ -16,7 +16,7 @@ export async function GET(request) {
       categories,
       created_at,
       application_link,
-      companies (name, logo_url)
+      companies (id, name, logo_url)
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
@@ -44,11 +44,15 @@ export async function GET(request) {
     }
 
     const displayLocation = job.location.length > 4 ? 'Multiple Locations' : job.location.filter(loc => loc.length > 2).join(', ');
-    
 
+
+    
+ 
     return {
+      job_id: job.id,
       companyLogo: job.companies.logo_url,
       companyName: job.companies.name,
+      companyId: job.companies.id,  
       title: job.job_title,
       postedDays,
       daysAgo,
