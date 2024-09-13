@@ -33,12 +33,16 @@ export default function SideBar() {
 
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
-      <div className={styles.logoContainer}>
-        <Image src="/Images/sidebar/Jobmiga_logo.png" alt="Jobmiga Logo" width={isOpen ? 100 : 80} height={isOpen ? 100 : 80} />
+ <div className={styles.logoContainer}>
+        <Image
+          src="/Images/sidebar/Jobmiga_logo.png"
+          alt="Jobmiga Logo"
+          width={isOpen ? 100 : 80}
+          height={isOpen ? 100 : 80}
+          onClick={toggleSidebar} // Mover el evento onClick al logo
+          className={styles.logo} // Añadir una clase para el logo si es necesario
+        />
         {isOpen && <h1>JOBHILL</h1>}
-        <button className={styles.toggleButton} onClick={toggleSidebar}>
-          <Image src="/Images/sidebar/menuIcon.png" alt="Toggle Menu" width={100} height={100} />
-        </button>
       </div>
       <ul className={styles.menu}>
         {menuItems.map((item) => (

@@ -82,33 +82,48 @@ function AddApplicationButton({ job }) {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
-            <h2>Confirm Application</h2>
-         <p><strong>Job Title:</strong> {job.title || 'Unknown Title'}</p>
-<p><strong>Company:</strong> {job.companyName || 'Unknown Company'}</p>
-<p><strong>Location:</strong> {job.location || 'Location Not Specified'}</p>
-            <p><strong>Applied Date:</strong> {dayjs().format("YYYY-MM-DD")}</p>
-            <div>
-              <label><strong>Referral:</strong></label>
-              <select value={referral_type} onChange={(e) => setReferral(e.target.value)}>
-                {referralOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.actions}>
-              <button className={styles.cancelButton} onClick={handleModalClose}>
-                Cancel
-              </button>
-              <button className={styles.confirmButton} onClick={handleApplicationSubmit}>
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
+       <div className={styles.modalOverlay}>
+       <div className={styles.modal}>
+         <div className={styles.modalHeader}>
+         <button className={styles.cancelButton} onClick={handleModalClose}>
+            <img src="/Images/cross.png" alt="" className={styles.crossimg} />
+           </button>
+           <h2>Add a New Application</h2>
+
+         </div>
+     
+         <div className={styles.modalInfo}>
+           <label>Company</label>
+           <input type="text" value={job.companyName || 'Ex. Jobhill'} readOnly />
+     
+           <label>Date Applied</label>
+           <input type="text" value={dayjs().format("YYYY-MM-DD")} readOnly />
+     
+           <label>Role</label>
+           <input type="text" value={job.title || 'Ex. Software Engineer 2025'} readOnly />
+     
+           <label>Status</label>
+           <input type="text" value="Applied" readOnly />
+     
+           <label>Referral</label>
+           <select value={referral_type} onChange={(e) => setReferral(e.target.value)}>
+             {referralOptions.map((option) => (
+               <option key={option.value} value={option.value}>
+                 {option.label}
+               </option>
+             ))}
+           </select>
+     
+           <div className={styles.actions}>
+     
+             <button className={styles.confirmButton} onClick={handleApplicationSubmit}>
+               Add Application
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+     
       )}
 
       {/* Alerts */}

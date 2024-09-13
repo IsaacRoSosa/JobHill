@@ -24,7 +24,7 @@ export async function login(formData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/jobs')
 }
 
 export async function signup(formData) {

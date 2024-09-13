@@ -152,3 +152,12 @@
 .menu li:hover .menuItemText {
   color: #FFD700; /* Color del texto cuando el elemento está en hover */
 }
+
+.logo{
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.logo:hover{
+  transform: scale(1.1);
+}

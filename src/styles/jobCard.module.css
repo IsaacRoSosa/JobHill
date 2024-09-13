@@ -153,27 +153,128 @@
     justify-content: center;
     z-index: 1000;
   }
-  
   .modal {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 80%;
+    color: black;
+    border-radius: 35px;
+    width: 550px;
+    max-width: 90%; /* Adjust for smaller screens */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Ensure the content doesn't overflow */
   }
+  
+  .modalHeader {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    background-color: #6B1ED8;
+    color: white;
+    padding: 5px;
+    width: 100%;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    font-size: 1.5rem;
+    height: 10vh;
+  }
+  
+  .modalHeader button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .modalInfo {
+    background-color: #AEAEAE;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Add space between elements */
+    align-items: center;
+
+
+  }
+  
+  .modalInfo label,
+  .modalInfo p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .modalInfo label {
+    font-size: 1.6rem;
+    margin-bottom: 0px;
+    color: #333;
+    font-weight: bold;
+
+  }
+  
+  .modalInfo input,
+  .modalInfo select {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    width: 70%;
+    background-color: white;
+    color: #333;
+    margin-top: 0px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .confirmButton {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirmButton:hover {
+    background-color: #333;
+  }
+  
+  .cancelButton {
+    background: none;
+    border: none;
+    color: #6B1ED8;
+    cursor: pointer;
+
+  }
+
+  .crossimg{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+
+  }
+  
   .alert {
-    position: absolute;
-    top: 10px; /* Ajusta la posición superior para que esté más arriba */
-    left: 50%; /* Centrar horizontalmente */
-    transform: translateX(-50%); /* Desplazar para asegurar que esté centrado */
-    background-color: #4BB543; /* Fondo verde de éxito */
-    color: rgb(0, 0, 0);
-    padding: 15px 30px; /* Aumentar el padding para mejor legibilidad */
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4BB543;
+    color: black;
+    padding: 15px 30px;
     border-radius: 8px;
     z-index: 1000;
-    width: 100%; /* Aumentar el ancho */
-    max-width: 1000px; /* Asegurar que no se vuelva demasiado ancho */
-    text-align: center; /* Centrar el texto */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Añadir una sombra sutil para profundidad */
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
