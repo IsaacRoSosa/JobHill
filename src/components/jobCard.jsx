@@ -11,10 +11,7 @@ const JobCard = ({ job }) => {
   const hasPeriod = job.period && job.period.trim() !== "";
 
   
-
-
   return (
-    
     <div className={styles.card}>
       <div className={styles.cardInfo}>
         <div className={styles.header}>
@@ -25,45 +22,26 @@ const JobCard = ({ job }) => {
           </div>
         </div>
 
-        <div className={styles.halfs}>
-          <div className={styles.details}>
+        {/* Information Section - Now using grid */}
+        <div className={styles.information}>
+          {job.location && (
             <p className={styles.info}><Image src="/Images/jobCard/location.png" alt="Location" width={18} height={18} /> {job.location}</p>
+          )}
+          {job.type && (
             <p className={styles.info}><Image src="/Images/jobCard/clock.png" alt="Type" width={18} height={18} /> {job.type}</p>
-            {hasPeriod && (
-              <p className={styles.info}><Image src={modalityIcon} alt="Modality" width={18} height={18} /> {job.modality}</p>
-            )}
-          </div>
-
-          <div className={styles.additionalInfo}>
-            {hasPeriod ? (
-              <p className={styles.info}><Image src="/Images/jobCard/calendar.png" alt="Period" width={18} height={18} /> {job.period}</p>
-            ) : (
-              <p className={styles.info}><Image src={modalityIcon} alt="Modality" width={18} height={18} /> {job.modality}</p>
-            )}
+          )}
+          {hasPeriod && (
+            <p className={styles.info}><Image src={modalityIcon} alt="Modality" width={18} height={18} /> {job.modality}</p>
+          )}
+          {job.categories && (
             <p className={styles.info}><Image src="/Images/jobCard/category.png" alt="Category" width={18} height={18} /> {job.categories}</p>
-
-            <div className={styles.actions}>
-              {hasPeriod ? (
-                <div>
-                  <ApplyButton applicationLink={job.application_link} />
-                  <AddApplicationButton job={job} />
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </div>
-          </div>
+          )}
         </div>
 
-        <div className={styles.spaceButtons}>
-          {hasPeriod ? (
-            <div></div>
-          ) : (
-            <div>
-              <ApplyButton applicationLink={job.application_link} />
-              <AddApplicationButton job={job} />
-            </div>
-          )}
+        {/* Actions section remains unchanged */}
+        <div className={styles.actions}>
+          <ApplyButton applicationLink={job.application_link} />
+          <AddApplicationButton job={job} />
         </div>
       </div>
     </div>
