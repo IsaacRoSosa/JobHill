@@ -67,7 +67,7 @@ function AddApplicationButton({ job }) {
     }
 
     setIsModalOpen(false);  // Close the modal after submission
-    setTimeout(() => setAlertMessage(null), 5000);  // Clear the alert after 5 seconds
+    setTimeout(() => setAlertMessage(null), 4000);  // Clear the alert after 5 seconds
   };
 
   const handleModalClose = () => {

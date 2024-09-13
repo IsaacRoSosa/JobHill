@@ -267,7 +267,8 @@
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4BB543;
+    background-color: #F8F0DE;
+    border: solid 1px black;
     color: black;
     padding: 15px 30px;
     border-radius: 8px;
@@ -276,5 +277,18 @@
     max-width: 1000px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    opacity: 0; /* Inicialmente invisible */
+    animation: fadeIn 0.5s forwards; /* Animación de aparición */
   }
   
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px); /* Desplazamiento inicial */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0); /* Posición final */
+    }
+  }
