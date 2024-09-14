@@ -35,6 +35,52 @@ const AppFetcher = () => {
     fetchApplications();
   }, []); // Ejecutar solo cuando el componente se monte
 
+  // Function to apply the filters to the applications list
+  const applyFilters = () => {
+    let filteredApps = [...applications];
+
+    // Filter by company
+    if (filters.company) {
+      filteredApps = filteredApps.filter(app =>
+        app.companyName.toLowerCase().includes(filters.company.toLowerCase())
+      );
+    }
+
+    // Filter by role
+    if (filters.role) {
+      filteredApps = filteredApps.filter(app =>
+        app.role.toLowerCase().includes(filters.role.toLowerCase())
+      );
+    }
+
+    // Filter by status
+    if (filters.status.value !== 'All') {
+      filteredApps = filteredApps.filter(app => app.status === filters.status.value);
+    }
+
+    // Filter by referral
+    if (filters.referral.value !== 'All') {
+      filteredApps = filteredApps.filter(app => app.referralType === filters.referral.value);
+    }
+
+    // Sort applications based on orderBy filter
+    switch (filters.orderBy.value) {
+      case 'Closest Action':
+        filteredApps = filteredApps.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        break;
+      case 'Latest Applied':
+        filteredApps = filteredApps.sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
+        break;
+      case 'Just Applied':
+        filteredApps = filteredApps.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+        break;
+      default:
+        break;
+    }
+
+    return filteredApps;
+  };
+
   // Options for the selects
   const statusOptions = [
     { value: 'All', label: 'All' },
@@ -93,6 +139,8 @@ const AppFetcher = () => {
       [name]: selectedOption,
     }));
   };
+
+  const filteredApplications = applyFilters();
 
   return (
     <div className={styles.page}>
@@ -174,7 +222,7 @@ const AppFetcher = () => {
           ) : error ? (
             <p>Error: {error}</p>
           ) : (
-            <AppTable applications={applications} />
+            <AppTable applications={filteredApplications} />
           )}
         </div>
       </div>
