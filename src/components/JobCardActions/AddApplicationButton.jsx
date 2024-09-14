@@ -9,7 +9,7 @@ function AddApplicationButton({ job }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [referral_type, setReferral] = useState("Cold Apply");
-  const [alertMessage, setAlertMessage] = useState(null);  // For handling alerts
+  const [alertMessage, setAlertMessage] = useState(null);  
   const supabase = createClient();
 
   const referralOptions = [
@@ -26,10 +26,9 @@ function AddApplicationButton({ job }) {
       return;
     }
 
-     // Logging the job data to check if it's correct
      console.log("Job Data: ", job);
 
-    setIsModalOpen(true);  // Open the modal
+    setIsModalOpen(true);  
   };
 
   const handleApplicationSubmit = async () => {
@@ -59,7 +58,7 @@ function AddApplicationButton({ job }) {
     const { error: insertError } = await supabase
       .from("applications")
       .insert([applicationData]);
-
+ 
     if (insertError) {
       setAlertMessage("Error adding application. Please try again.");
     } else {
