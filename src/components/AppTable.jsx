@@ -27,9 +27,10 @@ const AppTable = ({ applications }) => {
           <tr>
             <th>Company</th>
             <th className={styles.role}>Role</th>
-            <th>Applied</th>
-            <th>Last Updated</th>
-            <th>Due Date</th>
+            <th className={styles.location}>Location</th> {/* Add the new column here */}
+            <th className={styles.dates}>Applied</th>
+            <th className={styles.dates}>Last Updated</th>
+            <th className={styles.dates}>Due Date</th>
             <th>Status</th>
             <th>Referral</th>
             <th>Actions</th>
@@ -38,13 +39,14 @@ const AppTable = ({ applications }) => {
         <tbody>
           {currentApplications.map((app, index) => (
             <tr key={index}>
-              <td>{app.company}</td>
+              <td>{app.companyName}</td>
               <td className={styles.role}>{app.role}</td>
-              <td>{app.applied}</td>
-              <td>{app.lastUpdated}</td>
-              <td>{app.dueDate}</td>
+              <td className={styles.location}>{app.location}</td> 
+              <td className={styles.appliedDate}>{app.appliedDate}</td>
+              <td className={styles.lastUpdated}>{app.lastUpdated}</td>
+              <td className={styles.updateBy}>{app.updatedBy}</td>
               <td><span className={styles.statusLabel}>{app.status}</span></td>
-              <td><span className={styles.referralLabel}>{app.referral}</span></td>
+              <td><span className={styles.referralLabel}>{app.referralType}</span></td>
               <td>
                 <button className={styles.timelineButton}>Timeline</button>
                 <button className={styles.editButton}>Edit</button>

@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/appFetcher.module.css';
 import AppTable from '@/components/AppTable';
@@ -13,137 +13,27 @@ const AppFetcher = () => {
     orderBy: { value: 'Closest Action', label: 'Closest Action' },
   });
 
-// Mock data for the table
-const applications = [
-  {
-    company: 'Microsoft',
-    role: 'FullStack Developer',
-    applied: '15/08/24',
-    lastUpdated: '23/08/24',
-    dueDate: '25/08/24',
-    status: 'Rejected',
-    referral: 'Cold Apply'
-  },
-  {
-    company: 'Google',
-    role: 'FrontEnd Developer',
-    applied: '10/08/24',
-    lastUpdated: '22/08/24',
-    dueDate: '26/08/24',
-    status: 'Offer',
-    referral: 'Referred'
-  },
-  {
-    company: 'Amazon',
-    role: 'Backend Developer',
-    applied: '12/08/24',
-    lastUpdated: '20/08/24',
-    dueDate: '28/08/24',
-    status: 'Technical Interview',
-    referral: 'Employee Referral'
-  },
-  {
-    company: 'Facebook',
-    role: 'Data Scientist',
-    applied: '18/08/24',
-    lastUpdated: '21/08/24',
-    dueDate: '29/08/24',
-    status: 'Behavioural Interview',
-    referral: 'Cold Apply'
-  },
-  {
-    company: 'Apple',
-    role: 'iOS Developer',
-    applied: '14/08/24',
-    lastUpdated: '19/08/24',
-    dueDate: '27/08/24',
-    status: 'Onboarding Assesment',
-    referral: 'Referred'
-  },
-  {
-    company: 'Netflix',
-    role: 'UI/UX Designer',
-    applied: '11/08/24',
-    lastUpdated: '18/08/24',
-    dueDate: '30/08/24',
-    status: 'Applied',
-    referral: 'Employee Referral'
-  },
-  {
-    company: 'Spotify',
-    role: 'DevOps Engineer',
-    applied: '13/08/24',
-    lastUpdated: '17/08/24',
-    dueDate: '31/08/24',
-    status: 'Rejected',
-    referral: 'Cold Apply'
-  },
-  {
-    company: 'Tesla',
-    role: 'Machine Learning Engineer',
-    applied: '16/08/24',
-    lastUpdated: '24/08/24',
-    dueDate: '01/09/24',
-    status: 'Offer',
-    referral: 'Referred'
-  },
-  {
-    company: 'Adobe',
-    role: 'Product Manager',
-    applied: '17/08/24',
-    lastUpdated: '25/08/24',
-    dueDate: '02/09/24',
-    status: 'Technical Interview',
-    referral: 'Employee Referral'
-  },
-  {
-    company: 'Intel',
-    role: 'Hardware Engineer',
-    applied: '19/08/24',
-    lastUpdated: '26/08/24',
-    dueDate: '03/09/24',
-    status: 'Behavioural Interview',
-    referral: 'Cold Apply'
-  },
-  {
-    company: 'IBM',
-    role: 'Cloud Architect',
-    applied: '20/08/24',
-    lastUpdated: '27/08/24',
-    dueDate: '04/09/24',
-    status: 'Onboarding Assesment',
-    referral: 'Referred'
-  },
-  {
-    company: 'Oracle',
-    role: 'Database Administrator',
-    applied: '21/08/24',
-    lastUpdated: '28/08/24',
-    dueDate: '05/09/24',
-    status: 'Applied',
-    referral: 'Employee Referral'
-  },
-  {
-    company: 'Salesforce',
-    role: 'Intern – Product Engineer - Summer 2025',
-    applied: '22/08/24',
-    lastUpdated: '29/08/24',
-    dueDate: '06/09/24',
-    status: 'Rejected',
-    referral: 'Cold Apply'
-  },
-  {
-    company: 'Twitter',
-    role: 'Content Strategist',
-    applied: '23/08/24',
-    lastUpdated: '30/08/24',
-    dueDate: '07/09/24',
-    status: 'Offer',
-    referral: 'Referred'
-  },
-];
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  
+  // Fetch applications from the API when the component loads
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const response = await fetch('/api/getApps'); // Cambia este endpoint según tu configuración
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Error fetching applications');
+        setApplications(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    
+    fetchApplications();
+  }, []); // Ejecutar solo cuando el componente se monte
 
   // Options for the selects
   const statusOptions = [
@@ -172,8 +62,9 @@ const applications = [
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
-      width: 150,
-      padding: '1px',
+      width: 160,
+      height: 10,
+      padding: '0px',
       borderRadius: '5px',
       borderColor: '#ccc',
       boxShadow: 'none',
@@ -187,7 +78,7 @@ const applications = [
     }),
     option: (provided, state) => ({
       ...provided,
-      color: state.isSelected ? '#fff' : '#666', // Cambiar el color predeterminado a gris
+      color: state.isSelected ? '#fff' : '#666',
       backgroundColor: state.isSelected ? '#2684FF' : '#fff',
       '&:hover': {
         backgroundColor: state.isSelected ? '#2684FF' : '#BFEBFF',
@@ -276,16 +167,17 @@ const applications = [
       </div>
 
       <div className={styles.compCont}>
-            <div className={styles.tableContainer}>
-
-              <AppTable applications={applications}/>
-
-
-            </div>
-
-
+        <div className={styles.tableContainer}>
+          {/* Handle loading, errors, and the table */}
+          {loading ? (
+            <p>Loading applications...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : (
+            <AppTable applications={applications} />
+          )}
+        </div>
       </div>
-
     </div>
   );
 };

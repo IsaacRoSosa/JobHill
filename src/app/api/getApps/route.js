@@ -1,5 +1,5 @@
 import { createClient } from '/utils/supabase/server';
-
+import dayjs from 'dayjs';
 
 export async function GET(request) {
   const supabase = createClient();
@@ -27,6 +27,7 @@ export async function GET(request) {
       referral_type,
       application_link,
       company_id,
+      company_name,
       job_offer_id,
       location,
       update_by
@@ -43,15 +44,16 @@ export async function GET(request) {
     return {
       id: app.id,
       role: app.role,
-      appliedDate: app.applied_date,
-      lastUpdated: app.last_updated,
+      appliedDate: dayjs(app.applied_date).format('YY-MM-DD'),  // Formatear la fecha de aplicación
+      lastUpdated: dayjs(app.last_updated).format('YY-MM-DD'),  // Formatear la última fecha de actualización
       status: app.status,
+      companyName: app.company_name,
       referralType: app.referral_type,
       applicationLink: app.application_link,
       companyId: app.company_id,
       jobOfferId: app.job_offer_id,
       location: app.location,
-      updatedBy: app.update_by
+      updatedBy: app.update_by ? dayjs(app.update_by).format('YY-MM-DD') : null  // Formatear el campo `update_by`
     };
   });
 

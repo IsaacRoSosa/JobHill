@@ -16,10 +16,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
+
     background-color: #E6EFF4;
     gap: 14px;
-    height: 8.5vh;
+    height:9vh;
     width: 100%;
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
@@ -33,11 +33,12 @@
   .filterGroup label, .filterGroup2 label {
     font-size: 1.2rem;
     color: #333;
+    margin-bottom: 0px;
   }
   
   .filterInput {
     width: 160px;
-    padding: 10px 10px;
+    padding: 6px 6px;
     border-radius: 8px;
     border: 1px solid #CCC;
     background-color: #FFF;
@@ -101,7 +102,7 @@
   }
 
   .tableContainer{
-    width: 95%;
+    width: 90%;
     
   }
 

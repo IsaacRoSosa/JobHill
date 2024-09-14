@@ -4,20 +4,43 @@
 }
 
 .applicationTable tr th {
-    height: 5vh;
-    font-size: 1.3rem;
+    height: 2vh;
+    font-size: 1rem;
 }
 
 .applicationTable th, .applicationTable td {
-    padding: 10px 10px;
     border: none; 
     text-align: center;
 }
 
 .applicationTable th.role, .applicationTable td.role {
-    width: 150px; /* Set a fixed width for the role column */
+    width: 160px; /* Set a fixed width for the role column */
     white-space: normal; /* Allow wrapping */
     word-wrap: break-word; /* Break long words if necessary */
+
+}
+
+.applicationTable td.role {
+    font-size: 0.7rem;
+}
+
+ .applicationTable td.location {
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word; /* Break long words if necessary */
+    font-size: 0.8rem;
+}
+
+.applicationTable td.location , .applicationTable th.location {
+width: 90px;
+}
+
+
+.applicationTable td.appliedDate, .applicationTable td.lastUpdated, .applicationTable td.updateBy {
+    font-size: 0.9rem;
+}
+
+.applicationTable th.dates{
+    width: 70px;
 }
 
 .applicationTable th {
