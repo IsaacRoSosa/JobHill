@@ -17,10 +17,7 @@ export async function login(formData) {
   if (error) {
     console.log(error.message)
 
-    //esperamos 5 segundos antes de redirigir a la página de login
-    await new Promise((resolve) => setTimeout(resolve, 5000))
-    redirect('/login')
-    
+    return { error: error.message };    
   }
 
   revalidatePath('/', 'layout')

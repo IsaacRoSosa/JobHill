@@ -2,16 +2,31 @@
 
 import { login, signup, loginWithOAuth } from './actions'
 import styles from '@/styles/logIn.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [errorMessage])
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      await login(formData); // Llama a la función de login con los datos del formulario
+      const result = await login(formData); // Llama a la función de login con los datos del formulario
+      if (result?.error) {
+        // Si hay un error, mostramos el mensaje
+        setErrorMessage(result.error);
+      }
     } catch (error) {
       console.error("Error during login:", error);
     }
@@ -42,12 +57,17 @@ export default function AuthPage() {
 
   return (
     <div className={styles.container}>
+               {errorMessage && <div className={styles.alert}>{errorMessage}</div>}
+               
       <div className={`${styles.card} ${isSignUp ? styles.rotate : ''}`}>
         <div className={styles.cardInner}>
           <div className={styles.cardFront}>
             <div className={styles.leftPanel}>
               <h1 className={styles.headingPrimary}>JOBHILL</h1>
               <h2 className={styles.headingSecondary}>Welcome Back!</h2>
+
+     
+
 
               <form className={styles.form}  onSubmit={handleLoginSubmit} >
                 <label htmlFor="email" className={styles.label}>Email</label>

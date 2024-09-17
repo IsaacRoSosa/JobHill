@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Londrina+Solid:wght@100;300;400;900&family=M+PLUS+Rounded+1c&display=swap');
 
 .container {
+  position: relative;
   background-color: #0e3b59;
   color: white;
   height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
@@ -363,4 +364,21 @@
   padding-top: 0;
   margin-bottom: 5px;
 
+}
+
+.alert {
+  position: absolute; /* Para que se salga del flujo de la página */
+  top: 10px; /* Ajusta según la altura que prefieras */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: #f5c6cb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  z-index: 1000; /* Para asegurarse de que la alerta esté por encima de otros elementos */
 }
