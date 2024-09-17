@@ -1,14 +1,21 @@
+// src/components/LogOut.js
 import React from 'react';
-import styles from '@/styles/SideBar.module.css'; // Ajusta la ruta según tu estructura de proyecto
+import { logout } from '@/app/logout/actions'; // Importa la acción del servidor
+import styles from '@/styles/SideBar.module.css';
 import Image from 'next/image';
 
 function LogOut() {
-  const logout = () => {
-    // Lógica de cierre de sesión
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Ejecuta la función de logout del servidor
+    } catch (error) {
+      console.log('Error during logout:', error);
+    }
   };
 
   return (
-    <button onClick={logout} className={styles.logout}>
+    <button onClick={handleLogout} className={styles.logout}>
       <Image src="/Images/sidebar/logout.png" alt="Logout" width={30} height={30} />
     </button>
   );

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/appFetcher.module.css';
 import AppTable from '@/components/AppTable';
+import Loader from '@/components/Loader';
+import dayjs from 'dayjs';
 
 const AppFetcher = () => {
   const [filters, setFilters] = useState({
@@ -10,9 +12,9 @@ const AppFetcher = () => {
     role: '',
     status: { value: 'All', label: 'All' },
     referral: { value: 'All', label: 'All' },
-    orderBy: { value: 'Closest Action', label: 'Closest Action' },
+    orderBy: { value: 'Just Applied', label: 'Just Applied' },
   });
-
+ 
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -64,19 +66,23 @@ const AppFetcher = () => {
     }
 
     // Sort applications based on orderBy filter
-    switch (filters.orderBy.value) {
-      case 'Closest Action':
-        filteredApps = filteredApps.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-        break;
-      case 'Latest Applied':
-        filteredApps = filteredApps.sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
-        break;
-      case 'Just Applied':
-        filteredApps = filteredApps.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
-        break;
-      default:
-        break;
-    }
+// Sort applications based on orderBy filter
+switch (filters.orderBy.value) {
+  case 'Closest Action':
+    // Ordenar por la fecha de la acción más cercana
+    filteredApps = filteredApps.sort((a, b) => new Date(a.updatedBy) - new Date(b.updatedBy));
+    break;
+  case 'Just Applied':
+    // Ordenar por las aplicaciones más recientes
+    filteredApps = filteredApps.sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
+    break;
+  case 'Latest Applied':
+    // Ordenar por las aplicaciones con más tiempo desde que se aplicó
+    filteredApps = filteredApps.sort((a, b) => new Date(a.appliedDate) - new Date(b.appliedDate));
+    break;
+  default:
+    break;
+}
 
     return filteredApps;
   };
@@ -206,7 +212,7 @@ const AppFetcher = () => {
             role: '',
             status: { value: 'All', label: 'All' },
             referral: { value: 'All', label: 'All' },
-            orderBy: { value: 'Closest Action', label: 'Closest Action' },
+            orderBy: { value: 'Just Applied', label: 'Just Applied' },
           })}>
             Reset
           </button>

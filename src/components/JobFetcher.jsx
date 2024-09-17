@@ -92,16 +92,16 @@ const periodStyles = {
   multiValue: (provided, state) => {
     let backgroundColor;
     switch (state.data.value) {
-      case 'Summer 2025':
+      case 'Summer':
         backgroundColor = '#FFEFD5'; // PeachPuff
         break;
-      case 'Spring 2025':
+      case 'Spring':
         backgroundColor = '#E0FFE0'; // Light Green
         break;
-      case 'Fall 2025':
+      case 'Fall':
         backgroundColor = '#FFE4B5'; // Moccasin
         break;
-      case 'Winter 2025':
+      case 'Winter':
         backgroundColor = '#ADD8E6'; // Light Blue
         break;
       default:
@@ -141,10 +141,10 @@ export default function JobFetcher() {
   ];
 
   const periodOptions = [
-    { value: 'Summer 2025', label: 'Summer 2025' },
-    { value: 'Spring 2025', label: 'Spring 2025' },
-    { value: 'Fall 2025', label: 'Fall 2025' },
-    { value: 'Winter 2025', label: 'Winter 2025' }
+    { value: 'Summer', label: 'Summer' },
+    { value: 'Spring', label: 'Spring' },
+    { value: 'Fall', label: 'Fall' },
+    { value: 'Winter', label: 'Winter' }
   ];
 
   const orderByOptions = [
@@ -153,22 +153,22 @@ export default function JobFetcher() {
   ];
 
   const categoryOptions = [
-    { value: 'Android Development', label: 'Android Development' },
-    { value: 'FullStack Engineering', label: 'FullStack Engineering' },
-    { value: 'FrontEnd Engineering', label: 'FrontEnd Engineering' },
-    { value: 'BackEnd Engineering', label: 'BackEnd Engineering' },
+    { value: 'Android Dev', label: 'Android Development' },
+    { value: 'FullStack Eng', label: 'FullStack Engineering' },
+    { value: 'FrontEnd Eng', label: 'FrontEnd Engineering' },
+    { value: 'BackEnd Eng', label: 'BackEnd Engineering' },
     { value: 'Data & Analytics', label: 'Data & Analytics' },
     { value: 'AI & ML', label: 'AI & ML' },
     { value: 'Cybersecurity', label: 'Cybersecurity' },
     { value: 'DevOps', label: 'DevOps' },
     { value: 'Cloud Computing', label: 'Cloud Computing' },
-    { value: 'Game Development', label: 'Game Development' },
-    { value: 'Mobile Development', label: 'Mobile Development' },
-    { value: 'Software Engineering', label: 'Software Engineering' },
+    { value: 'Game Dev', label: 'Game Development' },
+    { value: 'Mobile Dev', label: 'Mobile Development' },
+    { value: 'Software Eng', label: 'Software Engineering' },
     { value: 'Quant', label: 'Quant' },
     { value: 'AR/VR', label: 'AR/VR' },
     { value: 'Research', label: 'Research' },
-    { value: 'IOs Development', label: 'IOs Development' },
+    { value: 'IOs Dev', label: 'IOs Development' },
     { value: 'IT', label: 'IT' },
     { value: 'QA & Testing', label: 'QA & Testing' },
   ];

@@ -44,8 +44,8 @@ export async function GET(request) {
     return {
       id: app.id,
       role: app.role,
-      appliedDate: dayjs(app.applied_date).format('YY-MM-DD'),  // Formatear la fecha de aplicación
-      lastUpdated: dayjs(app.last_updated).format('YY-MM-DD'),  // Formatear la última fecha de actualización
+      appliedDate: app.applied_date,
+      lastUpdated: app.last_updated,  // Formatear la última fecha de actualización
       status: app.status,
       companyName: app.company_name,
       referralType: app.referral_type,
@@ -53,7 +53,7 @@ export async function GET(request) {
       companyId: app.company_id,
       jobOfferId: app.job_offer_id,
       location: app.location,
-      updatedBy: app.update_by ? dayjs(app.update_by).format('YY-MM-DD') : null  // Formatear el campo `update_by`
+      updatedBy: app.update_by ? app.update_by : null  // Formatear el campo `update_by`
     };
   });
 

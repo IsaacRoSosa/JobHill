@@ -18,7 +18,7 @@ export async function GET(request) {
     })
     if (!error) {
       // redirect user to specified redirect URL or root of app
-      redirect(next)
+      redirect('/jobs')
 
     }
   }
