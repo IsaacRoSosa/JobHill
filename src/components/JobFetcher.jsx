@@ -120,8 +120,8 @@ const periodStyles = {
 };
 
 export default function JobFetcher() {
-  const [allJobs, setAllJobs] = useState([]); // Estado para almacenar todos los trabajos
-  const [jobs, setJobs] = useState([]); // Estado para almacenar los trabajos filtrados
+  const [allJobs, setAllJobs] = useState([]); // Job state to store all jobs
+  const [jobs, setJobs] = useState([]); // Job state to store filtered jobs
   const [filters, setFilters] = useState({
     company: '',
     role: '',
@@ -181,7 +181,7 @@ export default function JobFetcher() {
         const response = await fetch('/api/getJobs');
         const data = await response.json();
         setAllJobs(data); // Store all jobs
-        setJobs(data); // Initially, display all jobs
+        setJobs(data); 
         setLoading(false);
       } catch (err) {
         console.error('Error fetching job offers:', err);
@@ -191,6 +191,10 @@ export default function JobFetcher() {
 
     fetchJobs();
   }, []);
+
+
+  
+
 
   // Apply filters when filters state changes
   useEffect(() => {
@@ -264,6 +268,15 @@ export default function JobFetcher() {
     });
     setJobs(allJobs); // Restablece los trabajos al estado inicial
   };
+
+  const removeJobFromList = (jobId) => {
+    // Esperamos 6 segundos para simular la eliminación de la tarjeta
+    setTimeout(() => {
+      setJobs((prevJobs) => prevJobs.filter(job => job.job_id !== jobId));
+      setAllJobs((prevAllJobs) => prevAllJobs.filter(job => job.job_id !== jobId));
+    }, 3000); // 6000 milisegundos = 6 segundos
+  };
+  
 
   return (
     <div>
@@ -353,9 +366,9 @@ export default function JobFetcher() {
         </div>
       ) : (
         <div className={styles.jobGrid}>
-          {jobs.map((job, index) => (
+          {jobs.map((job) => (
+            <JobCard key={job.job_id} job={job} onApplicationSuccess={() => removeJobFromList(job.job_id)} />
             
-            <JobCard key={index} job={job} />
           ))}
         </div>
       )}

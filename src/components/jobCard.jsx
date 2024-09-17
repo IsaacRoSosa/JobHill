@@ -1,16 +1,16 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
 
+const JobCard = ({ job, onApplicationSuccess }) => {
 
-
-const JobCard = ({ job }) => {
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
 
-  
   return (
     <div className={styles.card}>
       <div className={styles.cardInfo}>
@@ -22,7 +22,6 @@ const JobCard = ({ job }) => {
           </div>
         </div>
 
-        {/* Information Section - Now using grid */}
         <div className={styles.information}>
           {job.location && (
             <p className={styles.info}><Image src="/Images/jobCard/location.png" alt="Location" width={18} height={18} /> {job.location}</p>
@@ -30,7 +29,7 @@ const JobCard = ({ job }) => {
           {job.type && (
             <p className={styles.info}><Image src="/Images/jobCard/clock.png" alt="Type" width={18} height={18} /> {job.type}</p>
           )}
-          {hasPeriod && (
+          {job.modality && (
             <p className={styles.info}><Image src={modalityIcon} alt="Modality" width={18} height={18} /> {job.modality}</p>
           )}
           {job.categories && (
@@ -38,10 +37,9 @@ const JobCard = ({ job }) => {
           )}
         </div>
 
-        {/* Actions section remains unchanged */}
         <div className={styles.actions}>
           <ApplyButton applicationLink={job.application_link} />
-          <AddApplicationButton job={job} />
+          <AddApplicationButton job={job} onApplicationSuccess={onApplicationSuccess} />
         </div>
       </div>
     </div>
