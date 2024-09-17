@@ -110,6 +110,7 @@ function AddApplicationButton({ job, onApplicationSuccess }) {
               <label>Status</label>
               <input type="text" value="Applied" readOnly />
 
+              <label>Referral</label>
               <select value={referral_type} onChange={(e) => setReferral(e.target.value)}>
                 <option value="Referred">Referred</option>
                 <option value="Cold Apply">Cold Apply</option>
