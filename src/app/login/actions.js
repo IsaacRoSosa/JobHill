@@ -67,9 +67,6 @@ export async function loginWithOAuth(provider) {
     console.error("OAuth login error:", error.message)
     //obtenemos el mensaje de error 
     console.log(error.message)
-  }else{
-    redirect('/jobs')
-  }
 
-  
+  }
 }

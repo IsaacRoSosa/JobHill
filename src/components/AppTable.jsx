@@ -17,7 +17,7 @@ const AppTable = ({ applications }) => {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
-    }
+    } 
   };
 
   return (
@@ -41,7 +41,11 @@ const AppTable = ({ applications }) => {
           {currentApplications.map((app, index) => (
             <tr key={index}>
               <td>{app.companyName}</td>
-              <td className={styles.role}>{app.role}</td>
+              <td className={styles.role}>
+                <a href={app.applicationLink} target="_blank" rel="noreferrer">
+                  {app.role}
+                </a>
+              </td>
               <td className={styles.location}>{app.location}</td> 
               <td className={styles.appliedDate}>{app.appliedDate}</td>
               <td className={styles.lastUpdated}>{app.lastUpdated}</td>

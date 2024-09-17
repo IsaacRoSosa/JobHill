@@ -4,7 +4,6 @@ import Select from 'react-select';
 import styles from '@/styles/appFetcher.module.css';
 import AppTable from '@/components/AppTable';
 import Loader from '@/components/Loader';
-import dayjs from 'dayjs';
 
 const AppFetcher = () => {
   const [filters, setFilters] = useState({
@@ -22,7 +21,7 @@ const AppFetcher = () => {
   // Fetch applications from the API when the component loads
   useEffect(() => {
     const fetchApplications = async () => {
-      try {
+      try { 
         const response = await fetch('/api/getApps'); // Cambia este endpoint según tu configuración
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || 'Error fetching applications');
@@ -224,7 +223,19 @@ switch (filters.orderBy.value) {
         <div className={styles.tableContainer}>
           {/* Handle loading, errors, and the table */}
           {loading ? (
-            <p>Loading applications...</p>
+              <div className={styles.loaderCont}>
+              <Loader className={styles.loader} /> 
+              <div className={styles.loading}>
+              <span>L</span>
+              <span>o</span>
+              <span>a</span>
+              <span>d</span>
+              <span>i</span>
+              <span>n</span>
+              <span>g</span>
+            </div>
+
+      </div>
           ) : error ? (
             <p>Error: {error}</p>
           ) : (
