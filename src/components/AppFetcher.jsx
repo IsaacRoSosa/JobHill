@@ -4,7 +4,7 @@ import Select from 'react-select';
 import styles from '@/styles/appFetcher.module.css';
 import AppTable from '@/components/AppTable';
 import Loader from '@/components/Loader';
-
+ 
 const AppFetcher = () => {
   const [filters, setFilters] = useState({
     company: '',

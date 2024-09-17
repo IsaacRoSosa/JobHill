@@ -40,7 +40,7 @@ const AppTable = ({ applications }) => {
         <tbody>
           {currentApplications.map((app, index) => (
             <tr key={index}>
-              <td>{app.companyName}</td>
+              <td  className={styles.companyName}>{app.companyName}</td>
               <td className={styles.role}>
                 <a href={app.applicationLink} target="_blank" rel="noreferrer">
                   {app.role}

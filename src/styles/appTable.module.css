@@ -65,11 +65,15 @@ width: 90px;
 .applicationTable tr {
     text-align: center;
 }
+.applicationTable th.companyName, .applicationTable td.companyName {
+    width: 160px; /* Set a fixed width for the role column */
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word; /* Break long words if necessary */
 
-.applicationTable td.company {
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
+}
+
+.applicationTable td.companyName {
+    font-size: 0.9rem;
 }
 
 .applicationTable tr:first-child th:first-child {
