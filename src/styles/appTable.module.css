@@ -94,18 +94,22 @@ width: 90px;
 
 .statusLabel {
     display: inline-block;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 4px 8px;
+    border-radius: 5px;
     font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 .referralLabel {
     display: inline-block;
-    padding: 5px 10px;
-    border-radius: 4px;
-    background-color: #E6EFF4;
-    color: #333;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
+
 
 .timelineButton, .editButton {
     padding: 5px 10px;
@@ -248,4 +252,45 @@ width: 90px;
     background-color: #2684FF;
     color: white;
   }
-  
+  .offerStatus, .declinedStatus, .appliedStatus, .coldApplyReferral, .oaStatus, .offerStatus, .declinedStatus , .acceptedStatus, .referredReferral{
+    background-color: #FFFF;
+  }
+
+  .offerStatus {
+
+    border: 2px solid #00C72B;
+}
+
+.behaviouralStatus{
+    border: 2px solid #0065FC;
+
+}
+
+.technicalStatus{
+    border: 2px solid #FF9BE3;
+
+}
+
+.declinedStatus {
+    border: 2px solid #FF8800;
+}
+
+.appliedStatus {
+    border: 2px solid #9B74FF;
+}
+
+.oaStatus {
+    border: 2px solid #1FB2B1;
+}
+
+.rejectedStatus {
+    border: 2px solid #FF0000;
+}
+
+.referredReferral {
+    border: 2px solid #00C72B;
+}
+
+.coldApplyReferral {
+    border: 2px solid #60C1EC;
+}

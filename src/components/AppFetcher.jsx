@@ -114,7 +114,7 @@ switch (filters.orderBy.value) {
     control: (provided) => ({
       ...provided,
       width: 160,
-      height: 10,
+      height: 2,
       padding: '0px',
       borderRadius: '5px',
       borderColor: '#ccc',
