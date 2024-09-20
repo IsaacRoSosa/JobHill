@@ -1,13 +1,15 @@
 .addButton {
-    background-color: #6B1ED8;
-    color: white;
-    padding: 10px 20px;
+    width: 15vh;
+    border-radius: 10px;
     border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
+    background-color: #001A33;
+    color: #FFF;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px; /* Espacio entre el botón y la tabla */
+    transition:  0.3s;
+    font-size: 1.2rem;
+    font-weight: 300;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .addButton:hover {

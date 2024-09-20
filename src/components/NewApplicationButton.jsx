@@ -65,7 +65,7 @@ function NewApplicationButton({ onApplicationSuccess }) {
       applied_date: appliedDate,
       status,
       referral_type: referralType,
-      application_link: applicationLink || null, // Opcional
+      application_link: applicationLink || null, 
     };
   
     const { error } = await supabase.from("applications").insert([applicationData]);
@@ -75,7 +75,7 @@ function NewApplicationButton({ onApplicationSuccess }) {
     } else {
       setAlertMessage("Application added successfully!");
       setIsModalOpen(false);
-      onApplicationSuccess(); // Llamar a la función para actualizar la tabla en AppFetcher
+      onApplicationSuccess();
     }
   };
   
@@ -83,7 +83,7 @@ function NewApplicationButton({ onApplicationSuccess }) {
   return (
     <>
       <button className={styles.addButton} onClick={() => setIsModalOpen(true)}>
-        Create New Application
+        Add New
       </button>
 
       {isModalOpen && (
