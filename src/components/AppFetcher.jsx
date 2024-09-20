@@ -244,7 +244,7 @@ switch (filters.orderBy.value) {
         </div>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default AppFetcher;
