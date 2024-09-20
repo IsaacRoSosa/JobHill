@@ -33,6 +33,8 @@ const AppTable = ({ applications }) => {
         return styles.technicalStatus
       case 'behavioural':
         return styles.behaviouralStatus
+      case 'accepted':
+        return styles.offerStatus;
       default:
         return '';
     }
@@ -83,12 +85,12 @@ const AppTable = ({ applications }) => {
                 <td><span className={`${styles.referralLabel} ${getReferralClass(app.referralType)}`}>{app.referralType}</span></td>
                 <td>
                   <button className={styles.timelineButton}>Timeline</button>
-                  <button className={styles.editButton}>Edit</button>
+                  <button className={styles.editButton}>Update</button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> 
       </div>
       <footer className={styles.tableFooter}>
         <div className={styles.paginationInfo}>

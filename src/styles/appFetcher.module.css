@@ -22,6 +22,7 @@
     height:9vh;
     width: 100%;
     font-family: 'M PLUS Rounded 1c', sans-serif;
+    z-index: 10;
 }
   
   .filterGroup, .filterGroup2 {
