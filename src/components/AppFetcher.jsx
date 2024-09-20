@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/appFetcher.module.css';
 import AppTable from '@/components/AppTable';
+import NewApplicationButton from '@/components/NewApplicationButton';
 import Loader from '@/components/Loader';
  
 const AppFetcher = () => {
@@ -18,23 +19,24 @@ const AppFetcher = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchApplications = async () => {
+    try { 
+      const response = await fetch('/api/getApps'); 
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Error fetching applications');
+      setApplications(data);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
   // Fetch applications from the API when the component loads
   useEffect(() => {
-    const fetchApplications = async () => {
-      try { 
-        const response = await fetch('/api/getApps'); // Cambia este endpoint según tu configuración
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error || 'Error fetching applications');
-        setApplications(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
     
     fetchApplications();
-  }, []); // Ejecutar solo cuando el componente se monte
+  }, []); 
 
   // Function to apply the filters to the applications list
   const applyFilters = () => {
@@ -64,25 +66,20 @@ const AppFetcher = () => {
       filteredApps = filteredApps.filter(app => app.referralType === filters.referral.value);
     }
 
-    // Sort applications based on orderBy filter
 // Sort applications based on orderBy filter
 switch (filters.orderBy.value) {
   case 'Closest Action':
-    // Ordenar por la fecha de la acción más cercana
     filteredApps = filteredApps.sort((a, b) => new Date(a.updatedBy) - new Date(b.updatedBy));
     break;
   case 'Just Applied':
-    // Ordenar por las aplicaciones más recientes
     filteredApps = filteredApps.sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
     break;
   case 'Latest Applied':
-    // Ordenar por las aplicaciones con más tiempo desde que se aplicó
     filteredApps = filteredApps.sort((a, b) => new Date(a.appliedDate) - new Date(b.appliedDate));
     break;
   default:
     break;
 }
-
     return filteredApps;
   };
 
@@ -146,6 +143,10 @@ switch (filters.orderBy.value) {
   };
 
   const filteredApplications = applyFilters();
+
+  const handleApplicationSuccess = () => {
+    fetchApplications();
+  }
 
   return (
     <div className={styles.page}>
@@ -215,7 +216,7 @@ switch (filters.orderBy.value) {
           })}>
             Reset
           </button>
-          <button className={styles.searchButton}>Create New</button>
+          <NewApplicationButton onApplicationSuccess={handleApplicationSuccess} />
         </div>
       </div>
 
