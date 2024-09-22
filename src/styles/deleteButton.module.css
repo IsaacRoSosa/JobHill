@@ -1,0 +1,78 @@
+.deleteButton {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: rgb(234, 250, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirmButton {
+    background-color: #003049;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+
+  }
+  
+  .cancelButton {
+    background-color: #3A3335;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .alert {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 4px;
+    z-index: 1000;
+    text-align: center;
+  }
+  
+
+.confirmButton:hover, .cancelButton:hover{
+    scale: 1.2;
+}

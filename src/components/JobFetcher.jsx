@@ -7,7 +7,6 @@ import JobCard from '@/components/JobCard';
 import Loader from '@/components/Loader';
 
 
-// Estilos personalizados para los selectores generales
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -49,7 +48,6 @@ const customStyles = {
   }),
 };
 
-// Estilos personalizados para los periodos
 const periodStyles = {
   option: (provided, state) => {
     let backgroundColor;
@@ -120,8 +118,8 @@ const periodStyles = {
 };
 
 export default function JobFetcher() {
-  const [allJobs, setAllJobs] = useState([]); // Job state to store all jobs
-  const [jobs, setJobs] = useState([]); // Job state to store filtered jobs
+  const [allJobs, setAllJobs] = useState([]); 
+  const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState({
     company: '',
     role: '',
@@ -133,7 +131,6 @@ export default function JobFetcher() {
 
   const [loading, setLoading] = useState(true);
 
-  // Opciones para los selectores
   const modalityOptions = [
     { value: 'All', label: 'All' },
     { value: 'On Site', label: 'On Site' },
@@ -173,14 +170,13 @@ export default function JobFetcher() {
     { value: 'QA & Testing', label: 'QA & Testing' },
   ];
 
-  // Fetch all jobs once when the component mounts
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);
       try {
         const response = await fetch('/api/getJobs');
         const data = await response.json();
-        setAllJobs(data); // Store all jobs
+        setAllJobs(data); 
         setJobs(data); 
         setLoading(false);
       } catch (err) {
@@ -193,11 +189,7 @@ export default function JobFetcher() {
   }, []);
 
 
-  
-
-
-  // Apply filters when filters state changes
-  useEffect(() => {
+    useEffect(() => {
     applyFilters();
   }, [filters]);
 
@@ -266,15 +258,15 @@ export default function JobFetcher() {
       period: [],
       orderBy: { value: 'Descending', label: 'Newest First' },
     });
-    setJobs(allJobs); // Restablece los trabajos al estado inicial
+    setJobs(allJobs);
   };
 
   const removeJobFromList = (jobId) => {
-    // Esperamos 6 segundos para simular la eliminación de la tarjeta
+
     setTimeout(() => {
       setJobs((prevJobs) => prevJobs.filter(job => job.job_id !== jobId));
       setAllJobs((prevAllJobs) => prevAllJobs.filter(job => job.job_id !== jobId));
-    }, 3000); // 6000 milisegundos = 6 segundos
+    }, 3000); 
   };
   
 

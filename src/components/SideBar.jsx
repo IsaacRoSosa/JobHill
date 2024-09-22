@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import LogOut from "@/components/LogOut";
 
 export default function SideBar() {
-  const [isOpen, setIsOpen] = useState(false); // Establecer un valor inicial seguro
+  const [isOpen, setIsOpen] = useState(false); 
   const pathname = usePathname();
 
-  // Ajustar el estado de `isOpen` solo en el cliente después de que el componente se haya montado
+
   useEffect(() => {
     const savedState = localStorage.getItem("sidebarState");
     if (savedState !== null) {
@@ -20,7 +20,6 @@ export default function SideBar() {
   const toggleSidebar = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    // Guardar el estado en localStorage
     localStorage.setItem("sidebarState", JSON.stringify(newState));
   };
 
@@ -39,8 +38,8 @@ export default function SideBar() {
           alt="Jobmiga Logo"
           width={isOpen ? 100 : 80}
           height={isOpen ? 100 : 80}
-          onClick={toggleSidebar} // Mover el evento onClick al logo
-          className={styles.logo} // Añadir una clase para el logo si es necesario
+          onClick={toggleSidebar} 
+          className={styles.logo} 
         />
         {isOpen && <h1>JOBHILL</h1>}
       </div>
@@ -63,11 +62,7 @@ export default function SideBar() {
           </div>
        
         )}
- 
-
         <LogOut />
-
-
       </div>
     </div>
   );

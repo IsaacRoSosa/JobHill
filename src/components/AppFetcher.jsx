@@ -19,6 +19,7 @@ const AppFetcher = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   const fetchApplications = async () => {
     try { 
       const response = await fetch('/api/getApps'); 
@@ -30,7 +31,7 @@ const AppFetcher = () => {
       setError(err.message);
       setLoading(false);
     }
-  };
+  }; 
 
   // Fetch applications from the API when the component loads
   useEffect(() => {
@@ -148,6 +149,10 @@ switch (filters.orderBy.value) {
     fetchApplications();
   }
 
+  const handleApplicationDelete = () => {
+    fetchApplications();
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.filterHeader}>
@@ -240,7 +245,10 @@ switch (filters.orderBy.value) {
           ) : error ? (
             <p>Error: {error}</p>
           ) : (
-            <AppTable applications={filteredApplications} />
+            <AppTable 
+            applications={filteredApplications} 
+            onApplicationDelete={handleApplicationDelete} 
+          />
           )}
         </div>
       </div>

@@ -72,10 +72,10 @@
 }
 
 .modalInfo {
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .modalInfo label {

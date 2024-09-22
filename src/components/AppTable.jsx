@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from '@/styles/appTable.module.css';
+import DeleteButton from '@/components/DeleteButton';
 
-const AppTable = ({ applications }) => {
+const AppTable = ({ applications, onApplicationDelete  }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const applicationsPerPage = 7;
 
@@ -16,7 +17,6 @@ const AppTable = ({ applications }) => {
     } 
   };
 
-  // Helper functions to get the appropriate CSS classes
   const getStatusClass = (status) => {
     switch (status.toLowerCase()) {
       case 'offer':
@@ -84,7 +84,12 @@ const AppTable = ({ applications }) => {
                 <td><span className={`${styles.statusLabel} ${getStatusClass(app.status)}`}>{app.status}</span></td>
                 <td><span className={`${styles.referralLabel} ${getReferralClass(app.referralType)}`}>{app.referralType}</span></td>
                 <td>
-                  <button className={styles.timelineButton}>Timeline</button>
+                <DeleteButton 
+                    applicationId={app.id} 
+                    companyName={app.companyName} 
+                    role={app.role}
+                    onDeleteSuccess={onApplicationDelete} 
+                  />
                   <button className={styles.editButton}>Update</button>
                 </td>
               </tr>
