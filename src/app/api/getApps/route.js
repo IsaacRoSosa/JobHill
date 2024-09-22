@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 export async function GET(request) {
   const supabase = createClient();
 
-  // Intentamos obtener el usuario autenticado para asegurarnos de que la autenticación esté funcionando correctamente
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   
   if (authError) {
