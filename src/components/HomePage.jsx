@@ -4,8 +4,7 @@ import styles from "@/styles/HomePage.module.css";
 
 const HomePage = () => {
   const handleSignIn = () => {
-    // Redirect to the login page
-    window.location.href = "/login";  // Assuming "/login" is the route for the login page
+    window.location.href = "/login";  
   };
 
   return (

@@ -6,7 +6,7 @@ import styles from "@/styles/jobCard.module.css";
 import dayjs from "dayjs";
 
 function AddApplicationButton({ job, onApplicationSuccess }) {
-  console.log('AddApplicationButton props:', { job, onApplicationSuccess }); // Verifica las props
+  console.log('AddApplicationButton props:', { job, onApplicationSuccess }); 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [referral_type, setReferral] = useState("Cold Apply");
@@ -71,7 +71,6 @@ function AddApplicationButton({ job, onApplicationSuccess }) {
         onApplicationSuccess();}
 
       setAlertMessage(`Application added for job: ${job.title}`);
-      // Llamar a onApplicationSuccess para eliminar la tarjeta
     }
 
     setIsModalOpen(false);

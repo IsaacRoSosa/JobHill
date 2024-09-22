@@ -1,6 +1,5 @@
-// src/components/LogOut.js
 import React from 'react';
-import { logout } from '@/app/logout/actions'; // Importa la acción del servidor
+import { logout } from '@/app/logout/actions'; 
 import styles from '@/styles/SideBar.module.css';
 import Image from 'next/image';
 
@@ -8,7 +7,7 @@ function LogOut() {
 
   const handleLogout = async () => {
     try {
-      await logout(); // Ejecuta la función de logout del servidor
+      await logout(); 
     } catch (error) {
       console.log('Error during logout:', error);
     }

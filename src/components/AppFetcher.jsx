@@ -33,7 +33,6 @@ const AppFetcher = () => {
     }
   }; 
 
-  // Fetch applications from the API when the component loads
   useEffect(() => {
     
     fetchApplications();

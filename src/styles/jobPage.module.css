@@ -9,19 +9,18 @@
 
 .jobContainer{
     height: 87vh;
-    overflow-y: auto; /* Permitir desplazamiento vertical */
-    overflow-x: hidden; /* Permitir desplazamiento vertical */
+    overflow-y: auto; 
+    overflow-x: hidden; 
     margin-top: 0px;
 }
 
-/* Ocultar la barra de desplazamiento */
 .jobContainer::-webkit-scrollbar {
     display: none;
 }
-
+ 
 .jobContainer {
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
 }
 
 .header{

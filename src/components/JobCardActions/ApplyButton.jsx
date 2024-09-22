@@ -1,5 +1,4 @@
-"use client";  // Para asegurarte de que se ejecute en el cliente
-
+"use client";  
 import React from 'react';
 import styles from '@/styles/jobCard.module.css';
 
