@@ -58,7 +58,7 @@ export default function SideBar() {
         {isOpen && (
           <div className={styles.profileInfo}>
             <p className={styles.username}>Santiago Sauma</p>
-            <p className={styles.role}>Estudiante</p>
+
           </div>
        
         )}

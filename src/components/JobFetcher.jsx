@@ -1,11 +1,9 @@
 "use client";
-
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/jobFetcher.module.css';
 import JobCard from '@/components/JobCard';
 import Loader from '@/components/Loader';
-
 
 const customStyles = {
   control: (provided, state) => ({
@@ -44,7 +42,7 @@ const customStyles = {
   }),
   placeholder: (provided) => ({
     ...provided,
-    color: '#999', // Color del placeholder
+    color: '#999', 
   }),
 };
 
@@ -52,18 +50,17 @@ const periodStyles = {
   option: (provided, state) => {
     let backgroundColor;
     switch (state.data.value) {
-      case 'Summer 2025':
-        backgroundColor = '#FFEFD5'; // PeachPuff
-
+      case 'Summer':
+        backgroundColor = '#FFEFD5'; 
         break;
-      case 'Spring 2025':
-        backgroundColor = '#E0FFE0'; // Light Green
+      case 'Spring':
+        backgroundColor = '#E0FFE0'; 
         break;
-      case 'Fall 2025':
-        backgroundColor = '#FFE4B5'; // Moccasin
+      case 'Fall':
+        backgroundColor = '#FFE4B5'; 
         break;
-      case 'Winter 2025':
-        backgroundColor = '#ADD8E6'; // Light Blue
+      case 'Winter':
+        backgroundColor = '#ADD8E6'; 
         break;
       default:
         backgroundColor = '#fff';
@@ -126,7 +123,7 @@ export default function JobFetcher() {
     modality: { value: 'All', label: 'All' },
     categories: [],
     period: [],
-    orderBy: { value: 'Descending', label: 'Newest First' },
+    orderBy: { value: 'Ascending', label: 'Newest First' },
   });
 
   const [loading, setLoading] = useState(true);
@@ -145,8 +142,8 @@ export default function JobFetcher() {
   ];
 
   const orderByOptions = [
-    { value: 'Descending', label: 'Newest First' },
-    { value: 'Ascending', label: 'Oldest First' }
+    { value: 'Descending', label: 'Oldest First' },
+    { value: 'Ascending', label: 'Newest First' }
   ];
 
   const categoryOptions = [
@@ -188,13 +185,12 @@ export default function JobFetcher() {
     fetchJobs();
   }, []);
 
-
-    useEffect(() => {
+  useEffect(() => {
     applyFilters();
   }, [filters]);
 
   const applyFilters = () => {
-    let filteredJobs = allJobs;
+    let filteredJobs = [...allJobs];
 
     // Filter by company
     if (filters.company) {
@@ -234,8 +230,12 @@ export default function JobFetcher() {
     }
 
     // Sort by date
-    filteredJobs.sort((a, b) => {
-      return filters.orderBy.value === 'Ascending' ? a.daysAgo - b.daysAgo : b.daysAgo - a.daysAgo;
+    filteredJobs = filteredJobs.sort((a, b) => {
+      if (filters.orderBy.value === 'Ascending') {
+        return a.daysAgo - b.daysAgo;
+      } else {
+        return b.daysAgo - a.daysAgo;
+      }
     });
 
     setJobs(filteredJobs);
@@ -256,9 +256,8 @@ export default function JobFetcher() {
       modality: { value: 'All', label: 'All' },
       categories: [],
       period: [],
-      orderBy: { value: 'Descending', label: 'Newest First' },
+      orderBy: { value: 'Ascending', label: 'Newest First' },
     });
-    setJobs(allJobs);
   };
 
   const removeJobFromList = (jobId) => {
@@ -344,23 +343,21 @@ export default function JobFetcher() {
 
       {loading ? (
         <div className={styles.loaderCont}>
-                    <Loader className={styles.loader} /> 
-                    <div className={styles.loading}>
-                    <span>L</span>
-                    <span>o</span>
-                    <span>a</span>
-                    <span>d</span>
-                    <span>i</span>
-                    <span>n</span>
-                    <span>g</span>
-                  </div>
-
+          <Loader className={styles.loader} /> 
+          <div className={styles.loading}>
+            <span>L</span>
+            <span>o</span>
+            <span>a</span>
+            <span>d</span>
+            <span>i</span>
+            <span>n</span>
+            <span>g</span>
+          </div>
         </div>
       ) : (
         <div className={styles.jobGrid}>
           {jobs.map((job) => (
             <JobCard key={job.job_id} job={job} onApplicationSuccess={() => removeJobFromList(job.job_id)} />
-            
           ))}
         </div>
       )}
