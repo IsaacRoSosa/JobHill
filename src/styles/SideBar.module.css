@@ -11,7 +11,7 @@
 }
 
 .open {
-  width: 250px;
+  width: 190px;
 }
 
 .closed {
@@ -46,8 +46,13 @@
   font-weight: bold;
 }
 
+.logoContainer h1{
+  font-size: 1.8rem;
+}
+
 .openMenuItem {
   padding: 15px 20px;
+
 }
 
 .closedMenuItem {
@@ -143,14 +148,15 @@
 .open .menuItemText {
     opacity: 1;
     transform: translateX(0);
+    font-size: 1rem;
   }
 
 .menu li.active .menuItemText {
-  color: #FFD700; /* Color del texto cuando el elemento está activo */
+  color: #FFD700; 
 }
 
 .menu li:hover .menuItemText {
-  color: #FFD700; /* Color del texto cuando el elemento está en hover */
+  color: #FFD700; 
 }
 
 .logo{

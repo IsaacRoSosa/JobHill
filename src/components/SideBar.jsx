@@ -36,8 +36,8 @@ export default function SideBar() {
         <Image
           src="/Images/sidebar/Jobmiga_logo.png"
           alt="Jobmiga Logo"
-          width={isOpen ? 100 : 80}
-          height={isOpen ? 100 : 80}
+          width={isOpen ? 60 : 80}
+          height={isOpen ? 60 : 80}
           onClick={toggleSidebar} 
           className={styles.logo} 
         />
@@ -47,14 +47,14 @@ export default function SideBar() {
         {menuItems.map((item) => (
           <li key={item.name} className={`${item.route === pathname ? styles.active : ""} ${isOpen ? styles.openMenuItem : styles.closedMenuItem}`}>
             <a href={item.route}>
-              <Image src={item.icon} alt={`${item.name} Icon`} width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} />
-              {isOpen && <span className={styles.menuItemText}>{item.name}</span>}
+              <Image src={item.icon} alt={`${item.name} Icon`} width={isOpen ? 40 : 40} height={isOpen ? 40 : 40} />
+              {isOpen && <span className={styles.menuItemText}>{item.name}</span>} 
             </a>
           </li>
         ))}
       </ul>
       <div className={`${styles.profile} ${isOpen ? styles.profileOpen : styles.profileClosed}`}>
-        <Image className={styles.pfp} src="/Images/sidebar/pfp_template.png" alt="Profile Picture" width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} />
+        <Image className={styles.pfp} src="/Images/sidebar/pfp_template.png" alt="Profile Picture" width={isOpen ? 40 : 30} height={isOpen ? 40 : 30} />
         {isOpen && (
           <div className={styles.profileInfo}>
             <p className={styles.username}>Santiago Sauma</p>
