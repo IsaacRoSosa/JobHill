@@ -20,6 +20,7 @@
 
 }
 
+
 .applicationTable td.role {
     font-size: 0.7rem;
 }
@@ -70,6 +71,8 @@ width: 90px;
     white-space: normal; 
     word-wrap: break-word;
 }
+
+
 
 .applicationTable td.companyName {
     font-size: 0.9rem;
@@ -260,52 +263,53 @@ width: 90px;
     background-color: #1F314E;
     color: white;
   }
-  .offerStatus, .declinedStatus, .appliedStatus, .coldApplyReferral, .oaStatus, .offerStatus, .declinedStatus , .acceptedStatus, .referredReferral{
+  .offerStatus, .declinedStatus, .appliedStatus, .coldApplyReferral,.behaviouralStatus , .oaStatus, .offerStatus, .declinedStatus , .acceptedStatus, .referredReferral{
     background-color: #FFFF;
+
   }
 
   .offerStatus {
 
     border: 2px solid #00C72B;
-    width: 80px;
+    width: 95px;
 
 }
 
 .behaviouralStatus{
     border: 2px solid #0065FC;
-    width: 80px;
+    width: 95px;
 
 
 }
 
 .technicalStatus{
     border: 2px solid #FF9BE3;
-    width: 80px;
+    width: 95px;
 
 
 }
 
 .declinedStatus {
     border: 2px solid #FF8800;
-    width: 80px;
+    width: 95px;
 
 }
 
 .appliedStatus {
     border: 2px solid #9B74FF;
-    width: 80px;
+    width: 95px;
 
 }
 
 .oaStatus {
     border: 2px solid #1FB2B1;
-    width: 80px;
+    width: 95px;
 
 }
 
 .rejectedStatus {
     border: 2px solid #FF0000;
-    width: 80px;
+    width: 95px;
 
 }
 

@@ -11,14 +11,8 @@ function page() {
       <div className={styles.appContainer}>
         <div className={styles.contentCenter}>
         <AppFetcher />
-
         </div>
-
-        
       </div>
-
-     
-
     </div>
   )
 }

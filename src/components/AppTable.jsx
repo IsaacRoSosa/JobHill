@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from '@/styles/appTable.module.css';
 import DeleteButton from '@/components/DeleteButton';
+import UpdateApplicationButton from '@/components/UpdateApplicationButton';
 
-const AppTable = ({ applications, onApplicationDelete  }) => {
+const AppTable = ({ applications, onApplicationDelete, onApplicationUpdate}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const applicationsPerPage = 7;
 
@@ -83,14 +84,17 @@ const AppTable = ({ applications, onApplicationDelete  }) => {
                 <td className={styles.updateBy}>{app.updatedBy}</td>
                 <td><span className={`${styles.statusLabel} ${getStatusClass(app.status)}`}>{app.status}</span></td>
                 <td><span className={`${styles.referralLabel} ${getReferralClass(app.referralType)}`}>{app.referralType}</span></td>
-                <td>
+                <td className={styles.buttons}>
                 <DeleteButton 
                     applicationId={app.id} 
                     companyName={app.companyName} 
                     role={app.role}
                     onDeleteSuccess={onApplicationDelete} 
                   />
-                  <button className={styles.editButton}>Update</button>
+                <UpdateApplicationButton 
+                          application={app} 
+                          onUpdateSuccess={onApplicationUpdate} 
+                />
                 </td>
               </tr>
             ))}

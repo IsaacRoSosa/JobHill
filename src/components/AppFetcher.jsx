@@ -152,6 +152,10 @@ switch (filters.orderBy.value) {
     fetchApplications();
   };
 
+  const handleApplicationUpdate = () => {
+    fetchApplications();
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.filterHeader}>
@@ -226,7 +230,6 @@ switch (filters.orderBy.value) {
 
       <div className={styles.compCont}>
         <div className={styles.tableContainer}>
-          {/* Handle loading, errors, and the table */}
           {loading ? (
               <div className={styles.loaderCont}>
               <Loader className={styles.loader} /> 
@@ -245,9 +248,10 @@ switch (filters.orderBy.value) {
             <p>Error: {error}</p>
           ) : (
             <AppTable 
-            applications={filteredApplications} 
-            onApplicationDelete={handleApplicationDelete} 
-          />
+              applications={filteredApplications} 
+              onApplicationDelete={handleApplicationDelete}
+              onApplicationUpdate={handleApplicationUpdate}
+            />
           )}
         </div>
       </div>
