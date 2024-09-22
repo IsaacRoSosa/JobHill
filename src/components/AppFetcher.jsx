@@ -12,7 +12,7 @@ const AppFetcher = () => {
     role: '',
     status: { value: 'All', label: 'All' },
     referral: { value: 'All', label: 'All' },
-    orderBy: { value: 'Just Applied', label: 'Just Applied' },
+    orderBy: { value: 'Applied Recently', label: 'Applied Recently' },
   });
  
   const [applications, setApplications] = useState([]);
@@ -69,14 +69,19 @@ const AppFetcher = () => {
 // Sort applications based on orderBy filter
 switch (filters.orderBy.value) {
   case 'Closest Action':
-    filteredApps = filteredApps.sort((a, b) => new Date(a.updatedBy) - new Date(b.updatedBy));
+    filteredApps = filteredApps
+    .filter(app => app.updatedBy) 
+    .sort((a, b) => new Date(a.updatedBy) - new Date(b.updatedBy));
     break;
-  case 'Just Applied':
+  case 'Applied Recently':
     filteredApps = filteredApps.sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
     break;
   case 'Latest Applied':
     filteredApps = filteredApps.sort((a, b) => new Date(a.appliedDate) - new Date(b.appliedDate));
     break;
+  case 'Updated Recently':
+    filteredApps = filteredApps.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+
   default:
     break;
 }
@@ -104,7 +109,8 @@ switch (filters.orderBy.value) {
   const orderByOptions = [
     { value: 'Closest Action', label: 'Closest Action' },
     { value: 'Latest Applied', label: 'Latest Applied' },
-    { value: 'Just Applied', label: 'Just Applied' },
+    { value: 'Applied Recently', label: 'Applied Recently' },
+    { value: 'Updated Recently', label: 'Updated Recently' },
   ];
 
   const customSelectStyles = {
