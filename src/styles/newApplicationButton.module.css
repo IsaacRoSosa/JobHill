@@ -10,18 +10,18 @@
     font-size: 1.2rem;
     font-weight: 300;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+}
   
-  .addButton:hover {
+.addButton:hover {
     scale: 1.1;
-  }
+}
 
-  .crossimg{
-    height: 25x;
+.crossimg{
+    height: 25px;
     width: 25px;
-  }
-  
-  .modalOverlay {
+}
+
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -32,9 +32,9 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-  }
-  
-  .modal {
+}
+
+.modal {
     background-color: #E0F0F8;
     color: black;
     border-radius: 10px;
@@ -44,77 +44,80 @@
     flex-direction: column;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-  }
-  
-  .modalHeader {
+
+}
+
+.modalHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #001A33;
     color: white;
-    padding: 20px;
+    padding: 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     font-size: 1.5rem;
-  }
-  
-  .modalHeader h2 {
+}
+
+.modalHeader h2 {
     margin: 0;
-  }
-  
-  .modalHeader button {
+}
+
+.modalHeader button {
     background: none;
     border: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-  }
-  
-  .modalInfo {
+}
+
+.modalInfo {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 15px;
+}
 
-  }
-  
-  .modalInfo label {
-    font-size: 1.2rem;
+.modalInfo label {
+    font-size: 1rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-  
-  .modalInfo input,
-  .modalInfo select {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.modalInfo input,
+.modalInfo select {
     padding: 10px;
     font-size: 1rem;
-    border: none;
+    border: 1px solid #CCC;
     border-radius: 5px;
     width: 100%;
     background-color: #FFF;
     color: #333;
-  }
-  
-  .rowInput{
+    box-sizing: border-box;
+}
+
+.doubleRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.rowInput {
+    width: 48%; /* Asegura que los inputs ocupen el 48% del ancho de la fila */
     display: flex;
     flex-direction: column;
-  }
+}
 
-  .doubleRow{
-    display: flex;
-    width: 100%;
-    gap: 10%;
-
-  }
-  .actions {
+.actions {
     display: flex;
     justify-content: center;
     margin-top: 15px;
-  }
-  
-  .confirmButton {
+}
+
+.confirmButton {
     background-color: #001A33;
     color: white;
     padding: 10px 20px;
@@ -123,21 +126,21 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .confirmButton:hover {
+}
+
+.confirmButton:hover {
     background-color: #004080;
-  }
-  
-  .cancelButton {
+}
+
+.cancelButton {
     background: none;
     border: none;
     color: white;
     cursor: pointer;
     font-size: 1.5rem;
-  }
-  
-  .alert {
+}
+
+.alert {
     position: fixed;
     top: 10px;
     left: 50%;
@@ -155,9 +158,9 @@
     transition: 0.3s;
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-  }
-  
-  @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateX(-50%) translateY(-20px);
@@ -166,5 +169,4 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
-  }
-  
+}
