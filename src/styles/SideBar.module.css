@@ -170,3 +170,72 @@
 .logo:hover{
   transform: scale(1.1);
 }
+
+/* Estilos para el modal de confirmación de cierre de sesión */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.modalContent h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #002E50;
+}
+
+.modalContent p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirmButton {
+  padding: 10px 20px;
+  background-color: #FF4D4D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirmButton:hover {
+  background-color: #ff1a1a;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #999;
+}

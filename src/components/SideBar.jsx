@@ -103,8 +103,8 @@ export default function SideBar() {
           className={styles.pfp}
           src={getAvatarUrl()}
           alt="Profile Picture"
-          width={isOpen ? 40 : 60}
-          height={isOpen ? 40 : 60}
+          width={isOpen ? 40 : 55}
+          height={isOpen ? 40 : 55}
         />
         {isOpen && (
           <div className={styles.profileInfo}>

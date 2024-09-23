@@ -9,7 +9,7 @@
     position: sticky; /* Hacer que el header sea pegajoso */
     top: 0; /* Pegarlo a la parte superior */
     margin: 0;
-    z-index: 1000; /* Asegurarse de que esté por encima del contenido desplazable */
+
 }
 
 .filterGroup, .filterGroup2 {
