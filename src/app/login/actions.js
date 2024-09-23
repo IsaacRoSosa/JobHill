@@ -14,7 +14,7 @@ export async function login(formData) {
 
   const { error } = await supabase.auth.signInWithPassword(data)
 
-  if (error) {
+  if (error) { 
     console.log(error.message)
 
     return { error: error.message };    
@@ -36,7 +36,6 @@ export async function signup(formData) {
   if (error) {
     console.log(error.message)
 
-    //esperamos 5 segundos antes de redirigir a la página de login
     await new Promise((resolve) => setTimeout(resolve, 5000))
 
     redirect('/login')
@@ -46,24 +45,26 @@ export async function signup(formData) {
   redirect('/')
 }
 
-export async function loginWithOAuth(provider) {
+export async function loginWithOAuth() {
   const supabase = createClient()
 
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
+    provider: 'github',
     options: {
-      redirectTo: './auth/callback', // Asegúrate de que esta URL esté correctamente configurada
+      redirectTo: 'http://localhost:3000/auth/callback',
     },
   })
 
-  if (data?.url) {
-    redirect(data.url)
-  }
+  console.log('OAuth data:', data)
+  console.log('OAuth error:', error)
 
   if (error) {
     console.error("OAuth login error:", error.message)
-    //obtenemos el mensaje de error 
-    console.log(error.message)
+    return { error: error.message }
+  }
 
+  if (data.url) {
+    console.log('Redirecting to:', data.url)
+    redirect(data.url)
   }
 }

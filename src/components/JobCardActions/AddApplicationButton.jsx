@@ -6,8 +6,6 @@ import styles from "@/styles/jobCard.module.css";
 import dayjs from "dayjs";
 
 function AddApplicationButton({ job, onApplicationSuccess }) {
-  console.log('AddApplicationButton props:', { job, onApplicationSuccess }); 
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [referral_type, setReferral] = useState("Cold Apply");
   const [alertMessage, setAlertMessage] = useState(null);

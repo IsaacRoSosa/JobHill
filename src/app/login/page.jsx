@@ -1,5 +1,4 @@
-'use client' // Asegura que este componente sea un componente del cliente
-
+'use client'
 import { login, signup, loginWithOAuth } from './actions'
 import styles from '@/styles/logIn.module.css'
 import { useState, useEffect } from 'react'
@@ -8,6 +7,8 @@ import Image from 'next/image'
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+
+
 
   useEffect(() => {
     if (errorMessage) {
@@ -22,9 +23,8 @@ export default function AuthPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      const result = await login(formData); // Llama a la función de login con los datos del formulario
+      const result = await login(formData);
       if (result?.error) {
-        // Si hay un error, mostramos el mensaje
         setErrorMessage(result.error);
       }
     } catch (error) {
@@ -36,7 +36,7 @@ export default function AuthPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      await signup(formData); // Llama a la función de signup con los datos del formulario
+      await signup(formData); 
     } catch (error) {
       console.error("Error during signup:", error);
     }
@@ -45,12 +45,11 @@ export default function AuthPage() {
 
   const handleGitHubLogin = async () => {
     try {
-      await loginWithOAuth('github')
+      await loginWithOAuth()
     } catch (error) {
       console.error("Error during GitHub login:", error)
     }
   }
-
   const handleToggle = () => {
     setIsSignUp(!isSignUp)
   }
@@ -80,10 +79,10 @@ export default function AuthPage() {
                   <a href="#" className={styles.forgotPasswordLink}>FORGOT PASSWORD?</a>
                 </div>
 
-                <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Log in with GitHub</button>
+                <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Log In with GitHub</button>
 
                 <button type="submit" className={styles.loginBtn}>Log in</button>
-
+ 
               </form>
             </div>
             <div className={styles.rightPanel}>
