@@ -1,9 +1,8 @@
-// app/auth/callback/route.js
 import { NextResponse } from 'next/server'
 import { createClient } from '/utils/supabase/server'
 
 export async function GET(request) {
-  console.log('Auth callback route reached') // Registro de depuración
+  console.log('Auth callback route reached')
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   console.log('Received code:', code)

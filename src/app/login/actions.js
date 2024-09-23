@@ -26,29 +26,48 @@ export async function login(formData) {
 
 export async function signup(formData) {
   const supabase = createClient();
-  const data = {
+  
+  // Registro del usuario con display name
+  const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email: formData.get('email'),
     password: formData.get('password'),
     options: {
       data: {
         first_name: formData.get('firstName'),
         last_name: formData.get('lastName'),
-        username: formData.get('username'),
-      },
-    },
-  };
+      }
+    }
+  });
 
-  const { error } = await supabase.auth.signUp(data);
-
-  if (error) {
-    console.log(error.message);
-    return { error: error.message };
+  if (signUpError) {
+    console.log(signUpError.message);
+    return { error: signUpError.message };
   }
 
+  // Si el registro es exitoso, obtenemos el user_id generado
+  const userId = signUpData.user.id;
+
+  // Insertamos los datos adicionales en la tabla users
+  const { error: userInsertError } = await supabase
+    .from('users')
+    .insert([
+      {
+        user_id: userId, // Usamos 'user_id' en lugar de 'id'
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        username: formData.get('username'),
+      },
+    ]);
+
+  if (userInsertError) {
+    console.log(userInsertError.message);
+    return { error: userInsertError.message };
+  }
+
+  // Finalmente, revalidamos y redirigimos
   revalidatePath('/', 'layout');
   redirect('/');
 }
-
 
 export async function loginWithOAuth() {
   const supabase = createClient()
