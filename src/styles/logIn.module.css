@@ -387,3 +387,21 @@
   background-color: grey;
   cursor: not-allowed;
 }
+
+.passwordAlert {
+  position: absolute;
+  top: 60px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f7d1b9;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: #f5c6cb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000; 
+  font-size: 0.8rem; 
+}

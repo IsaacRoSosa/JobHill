@@ -15,10 +15,17 @@ export default function AuthPage() {
     password: '',
     confirmPassword: '',
   });
-  const [passwordMismatchMessage, setPasswordMismatchMessage] = useState(null);
 
-  
+  const [passwordMismatchMessage, setPasswordMismatchMessage] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigits = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    return hasUpperCase && hasLowerCase && hasDigits && hasSpecialChar;
+  };
 
   useEffect(() => {
     const { firstName, lastName, email, username, password, confirmPassword } = signUpData;
@@ -29,21 +36,21 @@ export default function AuthPage() {
       username.trim() !== '' &&
       password.trim() !== '' &&
       confirmPassword.trim() !== '' &&
-      password === confirmPassword;
-  
+      password === confirmPassword &&
+      validatePassword(password);
+
     setIsFormValid(isValid);
   }, [signUpData]);
 
   useEffect(() => {
     if (signUpData.password !== signUpData.confirmPassword) {
       setPasswordMismatchMessage('Passwords do not match.');
+    } else if (!validatePassword(signUpData.password)) {
+      setPasswordMismatchMessage('Password must contain at least one lowercase, one uppercase, one digit, and one symbol.');
     } else {
       setPasswordMismatchMessage(null);
     }
   }, [signUpData.password, signUpData.confirmPassword]);
-
-
-
 
   useEffect(() => {
     if (errorMessage) {
@@ -70,8 +77,8 @@ export default function AuthPage() {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
   
-    if (signUpData.password !== signUpData.confirmPassword) {
-      setErrorMessage('Passwords do not match.');
+    if (!isFormValid) {
+      setErrorMessage('Please fill all fields correctly.');
       return;
     }
   
@@ -90,8 +97,6 @@ export default function AuthPage() {
       setErrorMessage('An unexpected error occurred during signup.');
     }
   };
-  
-  
 
   const handleGitHubLogin = async () => {
     try {
@@ -100,6 +105,7 @@ export default function AuthPage() {
       console.error("Error during GitHub login:", error)
     }
   }
+
   const handleToggle = () => {
     setIsSignUp(!isSignUp)
   }
@@ -112,10 +118,10 @@ export default function AuthPage() {
     }))
   }
 
-
   return (
     <div className={styles.container}>
-               {errorMessage && <div className={styles.alert}>{errorMessage}</div>}
+      {errorMessage && <div className={styles.alert}>{errorMessage}</div>}
+      {passwordMismatchMessage && <div className={styles.passwordAlert}>{passwordMismatchMessage}</div>}
                
       <div className={`${styles.card} ${isSignUp ? styles.rotate : ''}`}>
         <div className={styles.cardInner}>
@@ -123,9 +129,6 @@ export default function AuthPage() {
             <div className={styles.leftPanel}>
               <h1 className={styles.headingPrimary}>JOBHILL</h1>
               <h2 className={styles.headingSecondary}>Welcome Back!</h2>
-
-     
-
 
               <form className={styles.form}  onSubmit={handleLoginSubmit} >
                 <label htmlFor="email" className={styles.label}>Email</label>
@@ -141,7 +144,6 @@ export default function AuthPage() {
                 <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Log In with GitHub</button>
 
                 <button type="submit" className={styles.loginBtn}>Log in</button>
- 
               </form>
             </div>
             <div className={styles.rightPanel}>
@@ -222,7 +224,7 @@ export default function AuthPage() {
                       id="username"
                       name="username"
                       type="text"
-                      placeholder="Ex. Isaac Rojas"
+                      placeholder="Ex. KerminThePhrog"
                       className={styles.inputSign}
                       value={signUpData.username}
                       onChange={handleSignUpInputChange}
@@ -265,7 +267,6 @@ export default function AuthPage() {
                   <button
                     type="submit"
                     className={styles.loginBtn}
-                    disabled={!isFormValid}
                   >
                     Create Account
                   </button>
@@ -280,6 +281,7 @@ export default function AuthPage() {
                     Continue with GitHub
                   </button>
                 </div>
+
               </form>
             </div>
           </div>
