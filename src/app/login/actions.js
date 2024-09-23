@@ -66,7 +66,7 @@ export async function signup(formData) {
 
   // Finalmente, revalidamos y redirigimos
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/jobs');
 }
 
 export async function loginWithOAuth() {

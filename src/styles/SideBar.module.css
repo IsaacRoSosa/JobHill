@@ -34,7 +34,7 @@
 .menu {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0; 
 }
 
 .menu li {
@@ -100,9 +100,12 @@
   gap: 15px;
 }
 
-.username{
-    font-family: 'Rounded Mplus 1c', sans-serif;
-    font-weight: bold;
+.username {
+  font-family: 'Rounded Mplus 1c', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  word-break: break-word; /* Permite que las palabras largas se dividan */
+  overflow-wrap: break-word; /* Permite que las palabras largas se ajusten */
 }
 
 .role{
