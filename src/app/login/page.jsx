@@ -43,9 +43,13 @@ export default function AuthPage() {
   }, [signUpData]);
 
   useEffect(() => {
-    if (signUpData.password !== signUpData.confirmPassword) {
+    const { password, confirmPassword } = signUpData;
+
+    if (password.trim() === '' || confirmPassword.trim() === '') {
+      setPasswordMismatchMessage(null);
+    } else if (password !== confirmPassword) {
       setPasswordMismatchMessage('Passwords do not match.');
-    } else if (!validatePassword(signUpData.password)) {
+    } else if (!validatePassword(password)) {
       setPasswordMismatchMessage('Password must contain at least one lowercase, one uppercase, one digit, and one symbol.');
     } else {
       setPasswordMismatchMessage(null);
