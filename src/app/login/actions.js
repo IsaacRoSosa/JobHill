@@ -25,25 +25,30 @@ export async function login(formData) {
 }
 
 export async function signup(formData) {
-  const supabase = createClient()
+  const supabase = createClient();
   const data = {
-    email: formData.get('email-signup'),
-    password: formData.get('password-signup'),
-  }
+    email: formData.get('email'),
+    password: formData.get('password'),
+    options: {
+      data: {
+        first_name: formData.get('firstName'),
+        last_name: formData.get('lastName'),
+        username: formData.get('username'),
+      },
+    },
+  };
 
-  const { error } = await supabase.auth.signUp(data)
+  const { error } = await supabase.auth.signUp(data);
 
   if (error) {
-    console.log(error.message)
-
-    await new Promise((resolve) => setTimeout(resolve, 5000))
-
-    redirect('/login')
+    console.log(error.message);
+    return { error: error.message };
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  revalidatePath('/', 'layout');
+  redirect('/');
 }
+
 
 export async function loginWithOAuth() {
   const supabase = createClient()

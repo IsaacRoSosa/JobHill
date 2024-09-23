@@ -7,6 +7,41 @@ import Image from 'next/image'
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [signUpData, setSignUpData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [passwordMismatchMessage, setPasswordMismatchMessage] = useState(null);
+
+  
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const { firstName, lastName, email, username, password, confirmPassword } = signUpData;
+    const isValid =
+      firstName.trim() !== '' &&
+      lastName.trim() !== '' &&
+      email.trim() !== '' &&
+      username.trim() !== '' &&
+      password.trim() !== '' &&
+      confirmPassword.trim() !== '' &&
+      password === confirmPassword;
+  
+    setIsFormValid(isValid);
+  }, [signUpData]);
+
+  useEffect(() => {
+    if (signUpData.password !== signUpData.confirmPassword) {
+      setPasswordMismatchMessage('Passwords do not match.');
+    } else {
+      setPasswordMismatchMessage(null);
+    }
+  }, [signUpData.password, signUpData.confirmPassword]);
+
 
 
 
@@ -34,13 +69,28 @@ export default function AuthPage() {
   
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+  
+    if (signUpData.password !== signUpData.confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
+  
+    const formData = new FormData();
+    Object.entries(signUpData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+  
     try {
-      await signup(formData); 
+      const result = await signup(formData);
+      if (result?.error) {
+        setErrorMessage(result.error);
+      }
     } catch (error) {
-      console.error("Error during signup:", error);
+      console.error('Error during signup:', error);
+      setErrorMessage('An unexpected error occurred during signup.');
     }
   };
+  
   
 
   const handleGitHubLogin = async () => {
@@ -53,6 +103,15 @@ export default function AuthPage() {
   const handleToggle = () => {
     setIsSignUp(!isSignUp)
   }
+
+  const handleSignUpInputChange = (e) => {
+    const { name, value } = e.target
+    setSignUpData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
 
   return (
     <div className={styles.container}>
@@ -95,9 +154,6 @@ export default function AuthPage() {
             </div>
           </div>
 
-
-
-
           <div className={styles.cardBack}>
             <div className={styles.leftPanel2}>
               <h2 className={styles.headingPrimary2}>ALREADY A USER?</h2>
@@ -109,57 +165,124 @@ export default function AuthPage() {
 
             <div className={styles.rightPanel2}>
               <h2 className={styles.headingSecondary2}>SIGN UP</h2>
-              <h3 className={styles.headingTertiary}>WELCOME TO JOBHILL</h3>
+              <h3 className={styles.headingTertiary}>PLS FILL THE FORM</h3>
 
-
-              <form className={styles.form2} onSubmit={handleSignupSubmit} >
+              <form className={styles.form2} onSubmit={handleSignupSubmit}>
                 <div className={styles.twoColumn}>
                   <div className={styles.question}>
-                    <label htmlFor="first-name" className={styles.label2}>First Name</label>
-                    <input id="first-name" type="text" placeholder="Ex. John" className={styles.inputSign} />
+                    <label htmlFor="first-name" className={styles.label2}>
+                      First Name
+                    </label>
+                    <input
+                      id="first-name"
+                      name="firstName"
+                      type="text"
+                      placeholder="Ex. John"
+                      className={styles.inputSign}
+                      value={signUpData.firstName}
+                      onChange={handleSignUpInputChange}
+                    />
                   </div>
                   <div className={styles.question}>
-                    <label htmlFor="last-name" className={styles.label2}>Last Name</label>
-                    <input id="last-name" type="text" placeholder="Ex. Pork" className={styles.inputSign} />
+                    <label htmlFor="last-name" className={styles.label2}>
+                      Last Name
+                    </label>
+                    <input
+                      id="last-name"
+                      name="lastName"
+                      type="text"
+                      placeholder="Ex. Pork"
+                      className={styles.inputSign}
+                      value={signUpData.lastName}
+                      onChange={handleSignUpInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className={styles.twoColumn}>
-
-                <div className={styles.question}>
-                <label htmlFor="email-signup" className={styles.label2}>Email</label>
-                <input  name="email-signup" type="email" placeholder="Ex. muppets@show.com" className={styles.inputSign} />
-                </div>
-                <div className={styles.question}>
-                <label htmlFor="username" className={styles.label2}>Username</label>
-                <input id="username" type="text" placeholder="Ex. Isaac Rojas" className={styles.inputSign} />
-                </div>
+                  <div className={styles.question}>
+                    <label htmlFor="email-signup" className={styles.label2}>
+                      Email
+                    </label>
+                    <input
+                      id="email-signup"
+                      name="email"
+                      type="email"
+                      placeholder="Ex. muppets@show.com"
+                      className={styles.inputSign}
+                      value={signUpData.email}
+                      onChange={handleSignUpInputChange}
+                    />
+                  </div>
+                  <div className={styles.question}>
+                    <label htmlFor="username" className={styles.label2}>
+                      Username
+                    </label>
+                    <input
+                      id="username"
+                      name="username"
+                      type="text"
+                      placeholder="Ex. Isaac Rojas"
+                      className={styles.inputSign}
+                      value={signUpData.username}
+                      onChange={handleSignUpInputChange}
+                    />
+                  </div>
                 </div>
 
                 <div className={styles.twoColumn}>
                   <div className={styles.question}>
-                    <label htmlFor="password-signup" className={styles.label2}>Password</label>
-                    <input name="password-signup" type="password" placeholder="8 characters with a number" className={styles.inputSign} />
+                    <label htmlFor="password-signup" className={styles.label2}>
+                      Password
+                    </label>
+                    <input
+                      id="password-signup"
+                      name="password"
+                      type="password"
+                      placeholder="8 characters with a number"
+                      className={styles.inputSign}
+                      value={signUpData.password}
+                      onChange={handleSignUpInputChange}
+                    />
                   </div>
                   <div className={styles.question}>
-                    <label htmlFor="confirm-password" className={styles.label2}>Confirm Password</label>
-                    <input id="confirm-password" type="password" placeholder="********" className={styles.inputSign} />
+                    <label htmlFor="confirm-password" className={styles.label2}>
+                      Confirm Password
+                    </label>
+                    <input
+                      id="confirm-password"
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="********"
+                      className={styles.inputSign}
+                      value={signUpData.confirmPassword}
+                      onChange={handleSignUpInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className={styles.buttons2}>
-                <button type="submit" className={styles.loginBtn}>Create Account</button>
+                  <button
+                    type="submit"
+                    className={styles.loginBtn}
+                    disabled={!isFormValid}
+                  >
+                    Create Account
+                  </button>
 
+                  <h2 className={styles.Or}> OR </h2>
 
-                <h2 className={styles.Or}> OR </h2>
-
-                <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Continue with GitHub</button>
+                  <button
+                    type="button"
+                    onClick={handleGitHubLogin}
+                    className={styles.githubLogin}
+                  >
+                    Continue with GitHub
+                  </button>
                 </div>
-               
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </div>
