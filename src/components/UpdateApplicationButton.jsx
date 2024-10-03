@@ -14,7 +14,7 @@ function UpdateApplicationButton({ application, onUpdateSuccess }) {
   const [dueDate, setDueDate] = useState(application.dueDate || "");
   const [alertMessage, setAlertMessage] = useState(null);
   const supabase = createClient();
-
+ 
   const statusOptions = [
     { value: "Applied", label: "Applied" },
     { value: "Technical", label: "Technical Interview" },
@@ -56,7 +56,7 @@ function UpdateApplicationButton({ application, onUpdateSuccess }) {
         update_by: shouldShowDueDate ? dueDate : null,
       })
       .eq("id", application.id);
-
+ 
     if (error) {
       setAlertMessage("Error updating application. Please try again.");
     } else {

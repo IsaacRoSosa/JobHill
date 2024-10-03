@@ -70,8 +70,8 @@ const AppTable = ({ applications, onApplicationDelete, onApplicationUpdate}) => 
             </tr>
           </thead>
           <tbody>
-            {currentApplications.map((app, index) => (
-              <tr key={index}>
+            {currentApplications.map((app) => (
+              <tr key={app.id}>
                 <td className={styles.companyName}>{app.companyName}</td>
                 <td className={styles.role}>
                   <a href={app.applicationLink} target="_blank" rel="noreferrer">
@@ -88,7 +88,7 @@ const AppTable = ({ applications, onApplicationDelete, onApplicationUpdate}) => 
                 <DeleteButton 
                     applicationId={app.id} 
                     companyName={app.companyName} 
-                    role={app.role}
+                    role={app.role} 
                     onDeleteSuccess={onApplicationDelete} 
                   />
                 <UpdateApplicationButton 
@@ -128,3 +128,4 @@ const AppTable = ({ applications, onApplicationDelete, onApplicationUpdate}) => 
 };
 
 export default AppTable;
+ 
