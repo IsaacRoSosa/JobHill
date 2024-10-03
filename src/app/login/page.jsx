@@ -14,7 +14,7 @@ export default function AuthPage() {
     username: '',
     password: '',
     confirmPassword: '',
-  });
+  }); 
 
   const [passwordMismatchMessage, setPasswordMismatchMessage] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -130,10 +130,14 @@ export default function AuthPage() {
       <div className={`${styles.card} ${isSignUp ? styles.rotate : ''}`}>
         <div className={styles.cardInner}>
           <div className={styles.cardFront}>
+      <div> 
+{/*   
             <div className={styles.leftPanel}>
               <h1 className={styles.headingPrimary}>JOBHILL</h1>
               <h2 className={styles.headingSecondary}>Welcome Back!</h2>
 
+    <form>
+    
               <form className={styles.form}  onSubmit={handleLoginSubmit} >
                 <label htmlFor="email" className={styles.label}>Email</label>
                 <input id="email" type="email" name="email" placeholder="Enter your email" className={styles.input} required />
@@ -144,22 +148,31 @@ export default function AuthPage() {
                 <div className={styles.forgotPassword}>
                   <a href="#" className={styles.forgotPasswordLink}>FORGOT PASSWORD?</a>
                 </div>
+           
 
-                <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Log In with GitHub</button>
+                <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Continue with GitHub</button>
 
                 <button type="submit" className={styles.loginBtn}>Log in</button>
+       
               </form>
             </div>
+*/}    
+</div>      
             <div className={styles.rightPanel}>
-              <h2 className={styles.headingSecondary3}>NEW HERE?</h2>
+              <h2 className={styles.headingSecondary3}>JOBHILL</h2>
               <p className={styles.create}>Create an account to keep track of your applications</p>
        
-              <Image className={styles.logo} src="/Images/Jobmiga_Sign.png" width={300} height={300} alt="Jobhill logo 1" />
-                
+              <Image className={styles.logo} src="/Images/Jobmiga_Sign.png" width={250} height={250} alt="Jobhill logo 1" />
+{/*                 
               <button type="button" onClick={handleToggle} className={styles.signinBtn}>Sign Up</button>
+*/}   
+
+              <button type="button" onClick={handleGitHubLogin} className={styles.githubLogin}>Continue with GitHub</button>
             </div>
           </div>
+          
 
+{/*
           <div className={styles.cardBack}>
             <div className={styles.leftPanel2}>
               <h2 className={styles.headingPrimary2}>ALREADY A USER?</h2>
@@ -289,6 +302,8 @@ export default function AuthPage() {
               </form>
             </div>
           </div>
+          */}
+        
         </div>
       </div>
     </div>
