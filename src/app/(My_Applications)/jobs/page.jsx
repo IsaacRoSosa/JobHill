@@ -11,11 +11,8 @@ function page() {
       <div className={styles.jobContainer}>
         <JobFetcher />
       </div>
- 
-    
-
     </div>
   )
 }
 
-export default page 
+export default page  

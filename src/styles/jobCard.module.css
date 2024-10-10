@@ -10,13 +10,12 @@
     border: 2px solid #000000;
 }
 
-/* ONLY change for the grid */
 .information {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 10px; /* Gap between items */
-  margin-top: 6px; /* Space from the title */
+  gap: 10px; 
+  margin-top: 6px;
 
   height: 10vh;
 }
@@ -41,7 +40,7 @@
 .titleContainer {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
+    flex-grow: 1; 
 }
 
 .title {
@@ -49,7 +48,7 @@
     margin: 0;
     margin-top: 15px;
     color: black;
-    white-space: normal; /* Permitir que el texto se escriba en varias líneas */
+    white-space: normal; 
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%; 
@@ -293,17 +292,17 @@
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    opacity: 0; /* Inicialmente invisible */
-    animation: fadeIn 0.5s forwards; /* Animación de aparición */
+    opacity: 0; 
+    animation: fadeIn 0.5s forwards; 
   }
   
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateX(-50%) translateY(-20px); /* Desplazamiento inicial */
+      transform: translateX(-50%) translateY(-20px); 
     }
     to {
       opacity: 1;
-      transform: translateX(-50%) translateY(0); /* Posición final */
+      transform: translateX(-50%) translateY(0); 
     }
   }
