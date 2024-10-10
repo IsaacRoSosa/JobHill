@@ -43,9 +43,7 @@ export default function SideBar() {
 
   const menuItems = [
     { name: 'Jobs', icon: '/Images/sidebar/Jobs.png', route: '/jobs' },
-    { name: 'My Applications', icon: '/Images/sidebar/Applications.png', route: '/applications' },
-    { name: 'Friends', icon: '/Images/sidebar/Friends.png', route: '/friends' },
-    { name: 'News', icon: '/Images/sidebar/news.png', route: '/news' },
+    { name: 'My Applications', icon: '/Images/sidebar/Applications.png', route: '/applications' }
   ];
 
   // Función para obtener el nombre de usuario
