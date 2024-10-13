@@ -166,7 +166,7 @@ export default function JobFetcher() {
     { value: 'IT', label: 'IT' },
     { value: 'QA & Testing', label: 'QA & Testing' },
   ];
-
+ 
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);

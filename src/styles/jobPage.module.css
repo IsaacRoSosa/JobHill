@@ -17,20 +17,20 @@
 .jobContainer::-webkit-scrollbar {
     display: none;
 }
- 
+  
 .jobContainer {
     -ms-overflow-style: none;  
     scrollbar-width: none; 
 }
 
 .header{
-    height: 13vh;
+    height: 11vh;
     background-color: #00A9AC;
     width: 100%;
     font-family: 'Rounded Mplus 1c', sans-serif;
     display: flex;
     align-items: center;
-    margin-bottom: 0px;
+    padding: 0;
 }
 
 .pageTitle{
@@ -39,5 +39,34 @@
     margin: 0;
     padding: 1rem;
     font-family: 'Rounded Mplus 1c', sans-serif;
+}
+@media (max-width: 1200px) {
 
+    .pageTitle {
+        font-size: 2.2rem; 
+    }
+    
+}
+  @media (max-width: 750px) {
+    .header {
+        height: 9vh; 
+    }
+    .pageTitle {
+        font-size: 2rem; 
+    }
+    .jobContainer{
+        height: 91vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .header {
+        height: 6vh; 
+    }
+    .pageTitle {
+        font-size: 2rem; 
+    }
+    .jobContainer{
+        height: 94vh;
+    }
 }

@@ -6,9 +6,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.46);
     gap: 14px;
     height: 10vh;
-    position: sticky; /* Hacer que el header sea pegajoso */
-    top: 0; /* Pegarlo a la parte superior */
-    margin: 0;
+    position: sticky; 
+    top: 0; 
+    margin: 0; 
 
 }
 
@@ -46,8 +46,8 @@
 }
 
 .filterGroup2 input:focus {
-    border-color: #2684FF; /* Cambia este color al que prefieras */
-    outline: none; /* Opcional: elimina el borde de enfoque predeterminado del navegador */
+    border-color: #2684FF; 
+    outline: none;
     border: 2px solid #2684FF;
 }
 
@@ -87,12 +87,39 @@
 }
 
 .jobGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    gap: 1rem;
-    height: calc(100vh - 8vh); /* Resta la altura del header */
-    overflow-y: auto; /* Permitir desplazamiento vertical */
-    padding: 1rem;
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: repeat(3, 1fr); 
+  overflow-x:hidden ;
+  overflow-y: auto; 
+  row-gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/*Pantallas Med-Grandes de 1350 a 1180px mostramos 2 cards */
+@media (max-width: 1350px) {
+  .jobGrid {
+    padding-right: 6rem;
+  }
+}
+
+
+@media (max-width: 1180px) {
+  .jobGrid {
+    grid-template-columns: repeat(2, 1fr);
+    padding-right: 4rem;
+  }
+}
+
+/*Telefonos 1 Card*/
+@media (max-width: 750px) {
+  .jobGrid {
+    grid-template-columns: 1fr; 
+
+  }
 }
 
 .loaderCont{
