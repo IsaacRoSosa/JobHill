@@ -9,7 +9,6 @@
     position: sticky; 
     top: 0; 
     margin: 0; 
-
 }
 
 .filterGroup, .filterGroup2 {
@@ -99,7 +98,7 @@
   box-sizing: border-box;
 }
 
-/*Pantallas Med-Grandes de 1350 a 1180px mostramos 2 cards */
+
 @media (max-width: 1350px) {
   .jobGrid {
     padding-right: 6rem;
@@ -114,6 +113,8 @@
   }
 }
 
+
+
 /*Telefonos 1 Card*/
 @media (max-width: 750px) {
   .jobGrid {
@@ -121,6 +122,14 @@
 
   }
 }
+
+@media (max-width: 576px) {
+
+}
+
+
+
+
 
 .loaderCont{
     display: flex;

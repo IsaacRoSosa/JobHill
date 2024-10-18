@@ -88,16 +88,16 @@ const periodStyles = {
     let backgroundColor;
     switch (state.data.value) {
       case 'Summer':
-        backgroundColor = '#FFEFD5'; // PeachPuff
+        backgroundColor = '#FFEFD5'; 
         break;
       case 'Spring':
-        backgroundColor = '#E0FFE0'; // Light Green
+        backgroundColor = '#E0FFE0'; 
         break;
       case 'Fall':
-        backgroundColor = '#FFE4B5'; // Moccasin
+        backgroundColor = '#FFE4B5'; 
         break;
       case 'Winter':
-        backgroundColor = '#ADD8E6'; // Light Blue
+        backgroundColor = '#ADD8E6'; 
         break;
       default:
         backgroundColor = '#fff';
