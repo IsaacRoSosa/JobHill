@@ -6,31 +6,23 @@
   display: flex;
   flex-direction: column;
   width: calc(98% - 2rem); 
-
   min-width: 300px; 
-  min-height: 225px;
+  min-height: 220px;
   border: 2px solid #000000;
 
 }
 
-@media (max-width: 750px) {
-  .card {
-
-  }
+@media (max-width: 1180px) {
+  
 }
-
-
-
-
 
 
 .information {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px; 
-  margin-top: 6px;
   height: 10vh;
+  
 }
 
 .companyImage {
@@ -59,14 +51,22 @@
   margin-top: 10px;
   color: black;
   max-width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin-bottom: 0px;
+  word-wrap: break-word; /* Divide palabras largas */
+  white-space: normal; /* Permite varias líneas */
+  overflow-wrap: break-word; /* Manejo adicional para palabras largas */
+ line-height: 1; /* Espacio entre líneas */
+  display: -webkit-box; /* Configura Flexbox para truncar */
+  -webkit-line-clamp: 2; /* Máximo de 3 líneas */  
+  -webkit-box-orient: vertical; /* Orientación vertical para Flexbox */
+  overflow: hidden; /* Esconde contenido desbordado */    
+  text-overflow: ellipsis; /* Añade "..." al truncar */
 }
 
 .companyName {
     font-size: 1.3rem;
     color: #6B6969;
-    margin-top: 4px;
+    margin-top: 2px;
     font-weight: 600;
     justify-self: flex-end;
 }
@@ -86,12 +86,13 @@
 
 .info {
     margin-top: 0px;
-    margin-bottom: 9px;
+    margin-bottom: 0px;
     color: #003049;
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 5px;
+    row-gap: 5px;
+    column-gap: 10px;
 }
 
 .details {
@@ -99,7 +100,7 @@
     flex-direction: column;
     font-size: 1rem;
     width: 100%;
-    gap: 1px;
+
 }
 
 
@@ -126,7 +127,6 @@
     font-weight: bold;
     transition: 0.4s;
     font-size: 1.3rem;
-
 }
 
 .applyButton:hover, .addButton:hover {
@@ -145,14 +145,6 @@
     flex-direction: column;
 }
 
-.buttonBig{
-   scale : 1.35;
-   display: flex;
-   justify-content: space-evenly;
-   margin-top: 5px;
-   width: 60%;
-
-}
 
 .spaceButtons{
     display: flex;
@@ -221,7 +213,7 @@
   .modalInfo label,
   .modalInfo p {
     font-size: 1.1rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #333;
   }
 
@@ -316,3 +308,51 @@
     }
   }
 
+  @media (max-width: 790px){
+    .card{
+      min-height: 220px;
+    }
+    .applyButton {
+      font-size: 1.2rem;
+    }
+
+    .addButton {
+      font-size: 1.1rem;
+    }
+
+  }
+
+
+  @media (max-width: 750px) {
+
+    .card{
+      min-height: 220px;
+    }
+    .applyButton {
+      font-size: 1.2rem;
+    }
+
+    .title {
+      font-size: 1.1rem; /* Tamaño del texto */
+   
+  }
+
+  .companyName {
+    font-size: 1.2rem;
+}
+
+.postedDays {
+  font-size: 0.95rem;
+}
+
+   .addButton {
+      font-size: 1.2rem;
+   }
+  }
+
+@media (max-width: 450px) {
+    .card{
+      min-height: 180px;
+    }
+
+  }
