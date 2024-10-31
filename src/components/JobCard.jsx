@@ -15,7 +15,7 @@ const JobCard = ({ job, onApplicationSuccess }) => {
     <div className={styles.card}>
       <div className={styles.cardInfo}>
         <div className={styles.header}>
-          <img src={job.companyLogo} alt={`${job.companyName} logo`} width={80} height={80} className={styles.companyImage} />
+          <img src={job.companyLogo} alt={`${job.companyName} logo`} className={styles.companyImage} />
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>{job.title}</h2>
             <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span></p>

@@ -20,7 +20,7 @@ const customStyles = {
     ...provided,
     color: '#333',
     width: 150,
-  }),
+  }), 
   multiValue: (provided) => ({
     ...provided,
     backgroundColor: '#f0f0f0',
