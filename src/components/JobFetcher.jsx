@@ -8,29 +8,35 @@ import Loader from '@/components/Loader';
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    width: 200,
+    width: '100%',
     borderRadius: '8px',
     borderColor: state.isFocused ? '#2684FF' : '#ccc',
     boxShadow: state.isFocused ? '0 0 0 1px #2684FF' : 'none',
     '&:hover': {
       borderColor: '#2684FF',
     },
+    minHeight: '40px', 
+
   }),
   singleValue: (provided) => ({
     ...provided,
     color: '#333',
-    width: 150,
-  }), 
+    width: '100%',
+  }),   
   multiValue: (provided) => ({
     ...provided,
-    backgroundColor: '#f0f0f0',
-    borderRadius: '4px',
+    backgroundColor: '#e0e0e0',
+    borderRadius: '12px', 
     color: '#333',
+    maxWidth: '100%',
+    padding: '2px 5px', 
   }),
   multiValueLabel: (provided) => ({
     ...provided,
     color: '#333',
-    
+    width: '100%',
+    maxWidth: '100px', 
+    fontSize: '0.9rem', 
   }),
   option: (provided, state) => ({
     ...provided,
@@ -39,10 +45,12 @@ const customStyles = {
     '&:hover': {
       backgroundColor: state.isSelected ? '#2684FF' : '#f0f0f0',
     },
+    width: '100%',
   }),
   placeholder: (provided) => ({
     ...provided,
     color: '#999', 
+    width: '100%',
   }),
 };
 
@@ -76,7 +84,7 @@ const periodStyles = {
   },
   control: (provided, state) => ({
     ...provided,
-    width: 200,
+    width: '130%',
     borderRadius: '8px',
     borderColor: state.isFocused ? '#2684FF' : '#ccc',
     boxShadow: state.isFocused ? '0 0 0 1px #2684FF' : 'none',
@@ -117,6 +125,8 @@ const periodStyles = {
 export default function JobFetcher() {
   const [allJobs, setAllJobs] = useState([]); 
   const [jobs, setJobs] = useState([]);
+  const [showFilters, setShowFilters] = useState(true);
+
   const [filters, setFilters] = useState({
     company: '',
     role: '',
@@ -126,26 +136,26 @@ export default function JobFetcher() {
     orderBy: { value: 'Ascending', label: 'Newest First' },
   });
 
-  const [loading, setLoading] = useState(true);
+  const toggleFilters = () => {
+   setShowFilters(!showFilters);
+  };
 
+  const [loading, setLoading] = useState(true);
   const modalityOptions = [
     { value: 'All', label: 'All' },
     { value: 'On Site', label: 'On Site' },
     { value: 'Remote', label: 'Remote' }
   ];
-
   const periodOptions = [
     { value: 'Summer', label: 'Summer' },
     { value: 'Spring', label: 'Spring' },
     { value: 'Fall', label: 'Fall' },
     { value: 'Winter', label: 'Winter' }
   ];
-
   const orderByOptions = [
     { value: 'Descending', label: 'Oldest First' },
     { value: 'Ascending', label: 'Newest First' }
   ];
-
   const categoryOptions = [
     { value: 'Android Dev', label: 'Android Development' },
     { value: 'FullStack Eng', label: 'FullStack Engineering' },
@@ -271,6 +281,10 @@ export default function JobFetcher() {
 
   return (
     <div>
+
+
+
+      {showFilters && ( 
       <div className={styles.filterHeader}>
         <div className={styles.filterGroup2}>
           <label htmlFor="company">Company</label>
@@ -292,17 +306,7 @@ export default function JobFetcher() {
             onChange={(e) => setFilters({ ...filters, role: e.target.value })}
           />
         </div>
-        <div className={styles.filterGroup}>
-          <label htmlFor="modality">Modality</label>
-          <Select
-            name="modality"
-            value={filters.modality}
-            onChange={handleFilterChange}
-            options={modalityOptions}
-            styles={customStyles}
-            isSearchable={false}
-          />
-        </div>
+       
         <div className={styles.filterGroup}>
           <label htmlFor="categories">Categories</label>
           <Select
@@ -328,6 +332,17 @@ export default function JobFetcher() {
           />
         </div>
         <div className={styles.filterGroup}>
+          <label htmlFor="modality">Modality</label>
+          <Select
+            name="modality"
+            value={filters.modality}
+            onChange={handleFilterChange}
+            options={modalityOptions}
+            styles={customStyles}
+            isSearchable={false}
+          />
+        </div>
+        <div className={styles.filterGroup}>
           <label htmlFor="orderBy">Order by</label>
           <Select
             name="orderBy"
@@ -340,6 +355,12 @@ export default function JobFetcher() {
         </div>
         <button className={styles.resetButton} onClick={resetFilters}>Reset</button>
       </div>
+      )}
+
+      <button className={styles.toggleButton} onClick={toggleFilters}>
+         <img className={styles.icon} src="Images/filters.png" alt="" />
+         {showFilters ? 'Hide filters' : 'Show filters'}
+      </button>
 
       {loading ? (
         <div className={styles.loaderCont}>
