@@ -127,6 +127,7 @@ export default function JobFetcher() {
   const [allJobs, setAllJobs] = useState([]); 
   const [jobs, setJobs] = useState([]);
   const [companies, setCompanies] = useState([]);
+  const [filteredCompanies, setFilteredCompanies] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [showCompanies, setShowCompanies] = useState(false);
   const [showFilters, setShowFilters] = useState(true);
@@ -142,6 +143,12 @@ export default function JobFetcher() {
     requiresUsaCitizen: false,
   });
 
+  const [companyFilters, setCompanyFilters] = useState({
+    search: '',
+    sortBy: {value: 'A-Z', label: 'A-Z'},
+    sortByOpenings: {value: 'openingsDesc', label: 'More Openings'}
+  });
+
   const toggleFilters = () => setShowFilters(!showFilters);
 
   const toggleCompanies = () => {
@@ -153,6 +160,15 @@ export default function JobFetcher() {
     setSelectedCompany(companyId); 
     setShowCompanies(false);
   };
+
+  const sortOptions = [
+    { value: 'A-Z', label: 'A-Z' },
+    { value: 'Z-A', label: 'Z-A' },
+    { value: 'openingsAsc', label: 'Fewer Openings' },
+    { value: 'openingsDesc', label: 'More Openings' },
+
+  ];
+
 
 
   const modalityOptions = [
@@ -211,8 +227,9 @@ export default function JobFetcher() {
         acc[job.companyName].openings += 1;
         return acc;
       }, {});
-
-      setCompanies(Object.values(groupedCompanies));
+      const companiesArray = Object.values(groupedCompanies);
+      setCompanies(companiesArray);
+      setFilteredCompanies(companiesArray);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching job offers:', err);
@@ -289,6 +306,8 @@ export default function JobFetcher() {
     setJobs(filteredJobs);
   }, [filters,selectedCompany,allJobs]);
 
+
+
   const handleFilterChange = (selectedOption, actionMeta) => {
     const { name } = actionMeta;
     setFilters(prevFilters => ({
@@ -297,13 +316,53 @@ export default function JobFetcher() {
     }));
   };
 
-  const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    setFilters(prevFilters => ({
+  const applyCompanyFilters = useMemo(() => {
+    let filtered = [...companies];
+
+    // Filtrar por nombre de compañía
+    if (companyFilters.search) {
+      filtered = filtered.filter(company => 
+        company.name.toLowerCase().includes(companyFilters.search.toLowerCase())
+      );
+    }
+
+    // Ordenar según la selección
+    switch (companyFilters.sortBy.value) {
+      case 'A-Z':
+        filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'Z-A':
+        filtered = filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'openingsAsc':
+        filtered = filtered.sort((a, b) => a.openings - b.openings);
+        break;
+      case 'openingsDesc':
+        filtered = filtered.sort((a, b) => b.openings - a.openings);
+        break;
+      default:
+        break;
+    }
+
+    setFilteredCompanies(filtered);
+  }, [companyFilters, companies]);
+
+
+  const handleCompanyFilterChange = (selectedOption, actionMeta) => {
+    const { name } = actionMeta;
+    setCompanyFilters(prevFilters => ({
       ...prevFilters,
-      [name]: checked,
+      [name]: selectedOption,
     }));
   };
+
+  const handleSearchChange = (e) => {
+    setCompanyFilters(prevFilters => ({
+      ...prevFilters,
+      search: e.target.value,
+    }));
+  };
+
 
   const resetFilters = () => {
     setFilters({
@@ -327,32 +386,73 @@ export default function JobFetcher() {
 
   return (
     <div>
-      {selectedCompany && (
-        <button onClick={toggleCompanies} className={styles.backButton}>
-          ← Back to Companies
-        </button>
-      )}
 
-      <button className={styles.toggleButton} onClick={toggleCompanies}>
-        {showCompanies ? 'Show Job Listings' : 'Show Companies'}
-      </button>
+
 
       {showCompanies ? (
-         <div className={styles.companyGrid}>
-        {companies.map(company => (
-          <CompanyCard 
-            key={company.companyId} 
-            company={company} 
-            onSelect={selectCompany} 
-          />
-        ))}
-      </div>
+        <>
+        <div className={styles.TheHeader}>
+
+
+
+          <div className={styles.filterHeader}>
+              <div className={styles.filterGroup2}>
+                <label htmlFor="companySearch">Company Name</label>
+                <input
+                  type="text"
+                  id="companySearch"
+                  placeholder="Search Company"
+                  value={companyFilters.search}
+                  onChange={handleSearchChange}
+                />
+              </div>
+              <div className={styles.filterGroup}>
+                <label htmlFor="sortBy">Sort by</label>
+                <Select
+                  name="sortBy"
+                  value={companyFilters.sortBy}
+                  onChange={handleCompanyFilterChange}
+                  options={sortOptions}
+                  styles={customStyles}
+                  isSearchable={false}
+                />
+              </div>
+            </div>
+
+            <div className={styles.header2}> 
+              <button className={styles.toggleButton} onClick={toggleCompanies}>
+                {showCompanies ? 'Show Job Listings' : 'Show Companies'}
+              </button>
+            </div>
+        </div>
+
+
+        
+            <div className={styles.companyGrid}>
+            {filteredCompanies.map(company => (
+              <CompanyCard 
+                key={company.companyId} 
+                company={company} 
+                onSelect={selectCompany} 
+              />
+            ))}
+          </div>
+      </>
       ) : (
         <>
+        <div className={styles.TheHeader}>
+
           {showFilters && (
             <div className={styles.filterHeader}>
-              {/* Filtros existentes */}
+                            {selectedCompany && (
+                  <button onClick={toggleCompanies} className={styles.backButton}>
+                    <img src="/Images/sidebar/back.png" alt="Go Back" className={styles.arrow} />
+                  </button>
+              )}
+
               <div className={styles.filterGroup2}>
+
+
           <label htmlFor="company">Company</label>
           <input
             type="text"
@@ -423,9 +523,18 @@ export default function JobFetcher() {
               <button className={styles.resetButton} onClick={resetFilters}>Reset</button>
             </div>
           )}
-          <button className={styles.toggleButton} onClick={toggleFilters}>
-            {showFilters ? 'Hide filters' : 'Show filters'}
-          </button>
+
+            <div className={styles.header2}> 
+                <button className={styles.toggleButton} onClick={toggleFilters}>
+                {showFilters ? 'Hide filters' : 'Show filters'}
+              </button>
+
+              <button className={styles.toggleButton} onClick={toggleCompanies}>
+                {showCompanies ? 'Show Job Listings' : 'Show Companies'}
+              </button>
+            </div>
+        </div>
+        
           {loading ? (
             <div className={styles.loaderCont}>
               <Loader className={styles.loader} />

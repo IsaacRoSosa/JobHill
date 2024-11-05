@@ -6,9 +6,22 @@
   background-color: #E6EFF4;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.46);
   gap: 10px;
+
+}
+
+.TheHeader{
   position: sticky; 
   top: 0; 
   margin: 0; 
+
+}
+
+.header2 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
+  gap : 10px;
 }
 
 .filterGroup, .filterGroup2 {
@@ -22,7 +35,7 @@
 .toggleButton {
   padding: 4px 6px;
   border-radius: 8px;
-  background-color: rgba(170, 22, 255, 0.682) ;
+  background-color:rgba(5, 5, 108, 0.676);
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
@@ -249,8 +262,22 @@
   transform: scale(1.05);
 }
 
-.companyLogo {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
 }
+
+.backButton{
+  background-color: #006efe00;
+  border: none;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.backButton:hover{
+  scale: 1.3;
+}
+
