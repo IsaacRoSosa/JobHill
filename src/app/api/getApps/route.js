@@ -29,7 +29,7 @@ export async function GET(request) {
       company_name,
       job_offer_id,
       location,
-      update_by,
+      update_by
 
     `);
 
