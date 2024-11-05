@@ -4,6 +4,7 @@ import Select from 'react-select';
 import styles from '@/styles/jobFetcher.module.css';
 import JobCard from '@/components/JobCard';
 import Loader from '@/components/Loader';
+import CompanyCard from '@/components/CompanyCard';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -125,8 +126,11 @@ const periodStyles = {
 export default function JobFetcher() {
   const [allJobs, setAllJobs] = useState([]); 
   const [jobs, setJobs] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [showCompanies, setShowCompanies] = useState(false);
   const [showFilters, setShowFilters] = useState(true);
-
+  const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     company: '',
     role: '',
@@ -134,13 +138,26 @@ export default function JobFetcher() {
     categories: [],
     period: [],
     orderBy: { value: 'Ascending', label: 'Newest First' },
+    notOfferSponsor: false,
+    requiresUsaCitizen: false,
   });
 
   const toggleFilters = () => {
    setShowFilters(!showFilters);
   };
 
-  const [loading, setLoading] = useState(true);
+  const toggleCompanies = () => {
+    setShowCompanies(!showCompanies);
+    setSelectedCompany(null); 
+  }
+
+  const selectCompany = (companyId) => {
+    setSelectedCompany(companyId); 
+    setShowCompanies(false);
+    console.log('Selected company:', companyId);
+  };
+
+
   const modalityOptions = [
     { value: 'All', label: 'All' },
     { value: 'On Site', label: 'On Site' },
@@ -185,7 +202,21 @@ export default function JobFetcher() {
         const data = await response.json();
         setAllJobs(data); 
         setJobs(data); 
-        setLoading(false);
+        // Agrupar por compañías
+        const groupedCompanies = data.reduce((acc, job) => {
+        if (!acc[job.companyName]) {
+          acc[job.companyName] = { companyId: job.companyId, name: job.companyName, openings: 0, 
+            companyLogo: job.companyLogo
+           };
+        }
+        acc[job.companyName].openings += 1;
+        return acc;
+      }, {});
+
+      setCompanies(Object.values(groupedCompanies));
+      setLoading(false);
+
+
       } catch (err) {
         console.error('Error fetching job offers:', err);
         setLoading(false);
@@ -197,10 +228,14 @@ export default function JobFetcher() {
 
   useEffect(() => {
     applyFilters();
-  }, [filters]);
+  }, [filters,selectedCompany]);
 
   const applyFilters = () => {
     let filteredJobs = [...allJobs];
+
+    if (selectedCompany) {
+      filteredJobs = filteredJobs.filter(job => job.companyId === selectedCompany);
+    }
 
     // Filter by company
     if (filters.company) {
@@ -221,6 +256,14 @@ export default function JobFetcher() {
       filteredJobs = filteredJobs.filter(job =>
         job.modality === filters.modality.value
       );
+    }
+    //Filter by Sponsorshio
+    if (filters.notOfferSponsor) {
+      filteredJobs = filteredJobs.filter(job => job.notOfferSponsor === 1);
+    }  
+    
+    if (filters.requiresUsaCitizen) {
+      filteredJobs = filteredJobs.filter(job => job.requiresUsaCitizen === 1);
     }
 
     // Filter by categories
@@ -259,6 +302,14 @@ export default function JobFetcher() {
     }));
   };
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: checked,
+    }));
+  };
+
   const resetFilters = () => {
     setFilters({
       company: '',
@@ -281,12 +332,32 @@ export default function JobFetcher() {
 
   return (
     <div>
+      {selectedCompany && (
+        <button onClick={toggleCompanies} className={styles.backButton}>
+          ← Back to Companies
+        </button>
+      )}
+      
+      <button className={styles.toggleButton} onClick={toggleCompanies}>
+        {showCompanies ? 'Show Job Listings' : 'Show Companies'}
+      </button>
 
-
-
-      {showFilters && ( 
-      <div className={styles.filterHeader}>
-        <div className={styles.filterGroup2}>
+      {showCompanies ? (
+         <div className={styles.companyGrid}>
+        {companies.map(company => (
+          <CompanyCard 
+            key={company.companyId} 
+            company={company} 
+            onSelect={selectCompany} 
+          />
+        ))}
+      </div>
+      ) : (
+        <>
+          {showFilters && (
+            <div className={styles.filterHeader}>
+              {/* Filtros existentes */}
+              <div className={styles.filterGroup2}>
           <label htmlFor="company">Company</label>
           <input
             type="text"
@@ -353,34 +424,34 @@ export default function JobFetcher() {
             isSearchable={false}
           />
         </div>
-        <button className={styles.resetButton} onClick={resetFilters}>Reset</button>
-      </div>
-      )}
 
-      <button className={styles.toggleButton} onClick={toggleFilters}>
-         <img className={styles.icon} src="Images/filters.png" alt="" />
-         {showFilters ? 'Hide filters' : 'Show filters'}
-      </button>
-
-      {loading ? (
-        <div className={styles.loaderCont}>
-          <Loader className={styles.loader} /> 
-          <div className={styles.loading}>
-            <span>L</span>
-            <span>o</span>
-            <span>a</span>
-            <span>d</span>
-            <span>i</span>
-            <span>n</span>
-            <span>g</span>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.jobGrid}>
-          {jobs.map((job) => (
-            <JobCard key={job.job_id} job={job} onApplicationSuccess={() => removeJobFromList(job.job_id)} />
-          ))}
-        </div>
+              <button className={styles.resetButton} onClick={resetFilters}>Reset</button>
+            </div>
+          )}
+          <button className={styles.toggleButton} onClick={toggleFilters}>
+            {showFilters ? 'Hide filters' : 'Show filters'}
+          </button>
+          {loading ? (
+            <div className={styles.loaderCont}>
+              <Loader className={styles.loader} />
+              <div className={styles.loading}>
+                <span>L</span>
+                <span>o</span>
+                <span>a</span>
+                <span>d</span>
+                <span>i</span>
+                <span>n</span>
+                <span>g</span>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.jobGrid}>
+              {jobs.map((job) => (
+                <JobCard key={job.job_id} job={job} onApplicationSuccess={() => removeJobFromList(job.job_id)} />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
