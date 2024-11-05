@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 import styles from '@/styles/jobFetcher.module.css';
 import JobCard from '@/components/JobCard';
@@ -142,9 +142,7 @@ export default function JobFetcher() {
     requiresUsaCitizen: false,
   });
 
-  const toggleFilters = () => {
-   setShowFilters(!showFilters);
-  };
+  const toggleFilters = () => setShowFilters(!showFilters);
 
   const toggleCompanies = () => {
     setShowCompanies(!showCompanies);
@@ -154,7 +152,6 @@ export default function JobFetcher() {
   const selectCompany = (companyId) => {
     setSelectedCompany(companyId); 
     setShowCompanies(false);
-    console.log('Selected company:', companyId);
   };
 
 
@@ -194,20 +191,22 @@ export default function JobFetcher() {
     { value: 'QA & Testing', label: 'QA & Testing' },
   ];
  
-  useEffect(() => {
-    const fetchJobs = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/getJobs');
-        const data = await response.json();
-        setAllJobs(data); 
-        setJobs(data); 
-        // Agrupar por compañías
-        const groupedCompanies = data.reduce((acc, job) => {
+  const fetchJobs = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/getJobs');
+      const data = await response.json();
+      setAllJobs(data);
+      setJobs(data);
+
+      const groupedCompanies = data.reduce((acc, job) => {
         if (!acc[job.companyName]) {
-          acc[job.companyName] = { companyId: job.companyId, name: job.companyName, openings: 0, 
+          acc[job.companyName] = { 
+            companyId: job.companyId, 
+            name: job.companyName, 
+            openings: 0, 
             companyLogo: job.companyLogo
-           };
+          };
         }
         acc[job.companyName].openings += 1;
         return acc;
@@ -215,22 +214,18 @@ export default function JobFetcher() {
 
       setCompanies(Object.values(groupedCompanies));
       setLoading(false);
+    } catch (err) {
+      console.error('Error fetching job offers:', err);
+      setLoading(false);
+    }
+  };
 
-
-      } catch (err) {
-        console.error('Error fetching job offers:', err);
-        setLoading(false);
-      }
-    };
-
+  useEffect(() => {
     fetchJobs();
   }, []);
 
-  useEffect(() => {
-    applyFilters();
-  }, [filters,selectedCompany]);
 
-  const applyFilters = () => {
+  const applyFilters = useMemo(() => {
     let filteredJobs = [...allJobs];
 
     if (selectedCompany) {
@@ -292,7 +287,7 @@ export default function JobFetcher() {
     });
 
     setJobs(filteredJobs);
-  };
+  }, [filters,selectedCompany,allJobs]);
 
   const handleFilterChange = (selectedOption, actionMeta) => {
     const { name } = actionMeta;
@@ -337,7 +332,7 @@ export default function JobFetcher() {
           ← Back to Companies
         </button>
       )}
-      
+
       <button className={styles.toggleButton} onClick={toggleCompanies}>
         {showCompanies ? 'Show Job Listings' : 'Show Companies'}
       </button>
