@@ -13,5 +13,5 @@ const CompanyCard = memo(({ company, onSelect }) => {
     </div>
   );
 });
-
+CompanyCard.displayName = 'CompanyCard';
 export default CompanyCard;

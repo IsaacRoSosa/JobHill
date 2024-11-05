@@ -45,5 +45,5 @@ const JobCard = memo(({ job, onApplicationSuccess }) => {
     </div>
   );
 });
-
+JobCard.displayName = 'JobCard';
 export default JobCard;
