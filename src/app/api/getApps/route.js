@@ -30,9 +30,7 @@ export async function GET(request) {
       job_offer_id,
       location,
       update_by,
-      Emerging_Talent,
-      Requires_Usa_Citizen,
-      Not_Offer_Sponsor
+
     `);
 
   // Si hay un error al recuperar las aplicaciones, devolvemos una respuesta de error
@@ -56,9 +54,7 @@ export async function GET(request) {
       jobOfferId: app.job_offer_id,
       location: app.location,
       updatedBy: app.update_by ? app.update_by : null,  // Formatear el campo `update_by`
-      newTalent: app.Emerging_Talent ?? 0,
-      requiresUsaCitizen: app.Requires_Usa_Citizen ?? 0,
-      notOfferSponsor: app.Not_Offer_Sponsor ?? 0
+
     };
   });
 
