@@ -30,7 +30,6 @@ export async function GET(request) {
       job_offer_id,
       location,
       update_by,
-      4Grads,
       Emerging_Talent,
       Requires_Usa_Citizen,
       Not_Offer_Sponsor
