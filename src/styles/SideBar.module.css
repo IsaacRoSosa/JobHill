@@ -85,7 +85,7 @@
   align-items: center;
   padding: 5px;
   background-color: #1F3144;
-  margin-top: auto; /* Mueve el perfil al fondo */
+  margin-top: auto;
 }
 
 .profileOpen{
@@ -104,8 +104,8 @@
   font-family: 'Rounded Mplus 1c', sans-serif;
   font-weight: bold;
   font-size: 1rem;
-  word-break: break-word; /* Permite que las palabras largas se dividan */
-  overflow-wrap: break-word; /* Permite que las palabras largas se ajusten */
+  word-break: break-word; 
+  overflow-wrap: break-word; 
 }
 
 .role{
@@ -121,7 +121,7 @@
 
 }
 .profileInfo {
-  margin-top: 10px; /* Añade un margen superior para separar el texto de la imagen */
+  margin-top: 10px; 
 }
 
 .profileInfo p {
@@ -129,7 +129,7 @@
 }
 
 .logout {
-  margin-top: 10px; /* Añade un margen superior para separar el icono de cierre de sesión del perfil */
+  margin-top: 10px;
   cursor: pointer;
   background-color: #1F3144;
   border: none;
@@ -170,8 +170,6 @@
 .logo:hover{
   transform: scale(1.1);
 }
-
-/* Estilos para el modal de confirmación de cierre de sesión */
 
 .modalOverlay {
   position: fixed;
@@ -238,4 +236,47 @@
 
 .cancelButton:hover {
   background-color: #999;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    height: auto;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .menu li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile {
+    display: none; 
+  }
+
+  .logoContainer {
+    display: none; 
+  }
+
+  .menuItemText {
+    display: none; 
+  }
+
+  .open, .closed {
+    width: 100%;
+  }
 }

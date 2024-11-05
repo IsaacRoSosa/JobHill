@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
   const pathname = usePathname();
 
   // Rutas donde se debe mostrar el SideBar
-  const showSideBar = ['/jobs', '/applications', '/friends', '/news'].includes(pathname);
+  const showSideBar = ['/jobs', '/applications'/*, '/friends', '/news'*/].includes(pathname);
 
   const divStyles = {
     display : 'flex',

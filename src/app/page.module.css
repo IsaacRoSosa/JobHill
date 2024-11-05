@@ -316,3 +316,12 @@
 .signInButton:hover {
   background-color: #003366;
 }
+
+@media (max-width: 450px) {
+  .brand{
+    font-size: 3rem;
+  }
+
+
+
+}

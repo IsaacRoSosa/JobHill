@@ -1,12 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, {memo} from 'react';
 import Image from 'next/image';
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
 
-const JobCard = ({ job, onApplicationSuccess }) => {
+const JobCard = memo(({ job, onApplicationSuccess }) => {
 
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
@@ -15,7 +15,7 @@ const JobCard = ({ job, onApplicationSuccess }) => {
     <div className={styles.card}>
       <div className={styles.cardInfo}>
         <div className={styles.header}>
-          <img src={job.companyLogo} alt={`${job.companyName} logo`} width={80} height={80} className={styles.companyImage} />
+          <img src={job.companyLogo} alt={`${job.companyName} logo`} className={styles.companyImage} />
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>{job.title}</h2>
             <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span></p>
@@ -44,6 +44,6 @@ const JobCard = ({ job, onApplicationSuccess }) => {
       </div>
     </div>
   );
-};
-
+});
+JobCard.displayName = 'JobCard';
 export default JobCard;
