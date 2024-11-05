@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, {memo} from 'react';
 import styles from '@/styles/CompanyCard.module.css';
 
-const CompanyCard = ({ company, onSelect }) => {
+const CompanyCard = memo(({ company, onSelect }) => {
   return (
     <div className={styles.companyCard} onClick={() => onSelect(company.companyId)}>
       <img src={company.companyLogo ||'/Images/jobCard/office.png'} alt={company.name} className={styles.companyLogo} />
@@ -12,6 +12,6 @@ const CompanyCard = ({ company, onSelect }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CompanyCard;

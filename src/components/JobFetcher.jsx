@@ -242,7 +242,7 @@ export default function JobFetcher() {
   }, []);
 
 
-  const applyFilters = useMemo(() => {
+  const applyFilters = () => {
     let filteredJobs = [...allJobs];
 
     if (selectedCompany) {
@@ -304,7 +304,11 @@ export default function JobFetcher() {
     });
 
     setJobs(filteredJobs);
-  }, [filters,selectedCompany,allJobs]);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters, selectedCompany]);
 
 
 

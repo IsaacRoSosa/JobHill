@@ -1,12 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, {memo} from 'react';
 import Image from 'next/image';
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
 
-const JobCard = ({ job, onApplicationSuccess }) => {
+const JobCard = memo(({ job, onApplicationSuccess }) => {
 
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
@@ -44,6 +44,6 @@ const JobCard = ({ job, onApplicationSuccess }) => {
       </div>
     </div>
   );
-};
+});
 
 export default JobCard;
