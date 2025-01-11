@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
+import { createClient } from "/utils/supabase/client";
 import Select from 'react-select';
 import styles from '@/styles/jobFetcher.module.css';
 import JobCard from '@/components/JobCard';
 import Loader from '@/components/Loader';
 import CompanyCard from '@/components/CompanyCard';
-
+ 
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -128,10 +129,12 @@ export default function JobFetcher() {
   const [jobs, setJobs] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [filteredCompanies, setFilteredCompanies] = useState([]);
+  const [hiddenJobs, setHiddenJobs] = useState([]); 
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [showCompanies, setShowCompanies] = useState(false);
   const [showFilters, setShowFilters] = useState(true);
   const [loading, setLoading] = useState(true);
+  const supabase = createClient()
   const [filters, setFilters] = useState({
     company: '',
     role: '',
@@ -142,25 +145,20 @@ export default function JobFetcher() {
     notOfferSponsor: false,
     requiresUsaCitizen: false,
   });
-
   const [companyFilters, setCompanyFilters] = useState({
     search: '',
     sortBy: {value: 'A-Z', label: 'A-Z'},
     sortByOpenings: {value: 'openingsDesc', label: 'More Openings'}
   });
-
   const toggleFilters = () => setShowFilters(!showFilters);
-
   const toggleCompanies = () => {
     setShowCompanies(!showCompanies);
     setSelectedCompany(null); 
   }
-
   const selectCompany = (companyId) => {
     setSelectedCompany(companyId); 
     setShowCompanies(false);
   };
-
   const sortOptions = [
     { value: 'A-Z', label: 'A-Z' },
     { value: 'Z-A', label: 'Z-A' },
@@ -168,9 +166,6 @@ export default function JobFetcher() {
     { value: 'openingsDesc', label: 'More Openings' },
 
   ];
-
-
-
   const modalityOptions = [
     { value: 'All', label: 'All' },
     { value: 'On Site', label: 'On Site' },
@@ -209,13 +204,36 @@ export default function JobFetcher() {
  
   const fetchJobs = async () => {
     setLoading(true);
+
     try {
       const response = await fetch('/api/getJobs');
-      const data = await response.json();
-      setAllJobs(data);
-      setJobs(data);
+      const jobsData = await response.json();
 
-      const groupedCompanies = data.reduce((acc, job) => {
+      // Fetch user preferences (if authenticated)
+      const user = await supabase.auth.getUser();
+      let hiddenJobsFromPreferences = [];
+      if (user?.data?.user) {
+        const { data: preferences, error } = await supabase
+          .from("user_preferences")
+          .select("hidden_jobs")
+          .eq("user_id", user.data.user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user preferences:", error);
+        } else {
+          hiddenJobsFromPreferences = preferences?.hidden_jobs || [];
+        }
+      }
+
+      const filteredJobs = jobsData.filter(
+        (job) => !hiddenJobsFromPreferences.includes(job.job_id)
+      );
+
+      setAllJobs(filteredJobs);
+      setJobs(filteredJobs);
+
+      const groupedCompanies = jobsData.reduce((acc, job) => {
         if (!acc[job.companyName]) {
           acc[job.companyName] = { 
             companyId: job.companyId, 
@@ -240,6 +258,35 @@ export default function JobFetcher() {
   useEffect(() => {
     fetchJobs();
   }, []);
+
+  const onApplicationHide = (jobId) => {
+    // Remove hidden job from the visible list
+    setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+    setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
+
+    // Add job to hidden list
+    setHiddenJobs((prevHiddenJobs) => [...prevHiddenJobs, jobId]);
+
+    // Optional: Update preferences in Supabase
+    const updateHiddenJobs = async () => {
+      const user = await supabase.auth.getUser();
+      if (!user?.data?.user) return;
+
+      const { error } = await supabase
+        .from("user_preferences")
+        .update({
+          hidden_jobs: [...hiddenJobs, jobId],
+        })
+        .eq("user_id", user.data.user.id);
+
+      if (error) {
+        console.error("Error updating hidden jobs:", error);
+      }
+    };
+
+    updateHiddenJobs();
+  };
+
 
 
   const applyFilters = () => {
@@ -555,7 +602,12 @@ export default function JobFetcher() {
           ) : (
             <div className={styles.jobGrid}>
               {jobs.map((job) => (
-                <JobCard key={job.job_id} job={job} onApplicationSuccess={() => removeJobFromList(job.job_id)} />
+                <JobCard
+                 key={job.job_id} 
+                 job={job}
+                 onApplicationSuccess={() => removeJobFromList(job.job_id)} 
+                 onApplicationHide={() => onApplicationHide(job.job_id)}
+                 />
               ))}
             </div>
           )}

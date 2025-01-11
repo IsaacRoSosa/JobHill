@@ -5,8 +5,9 @@ import Image from 'next/image';
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
+import HideApplication from '@/components/JobCardActions/AddApplicationButton';
 
-const JobCard = memo(({ job, onApplicationSuccess }) => {
+const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
 
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
@@ -49,6 +50,7 @@ const JobCard = memo(({ job, onApplicationSuccess }) => {
         </div>
 
         <div className={styles.actions}>
+          <HideApplication job={job} onApplicationHide={onApplicationHide}/>
           <ApplyButton applicationLink={job.application_link} />
           <AddApplicationButton job={job} onApplicationSuccess={onApplicationSuccess} />
         </div>

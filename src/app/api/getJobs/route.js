@@ -65,7 +65,7 @@ export async function GET(request) {
       categories: job.categories.join(', '),
       application_link: job.application_link,
       not_offer_sponsor: job.not_offer_sponsor,
-      requires_usa_citizen: job.requires_usa_citizen,
+      requires_usa_citizen: job.requires_usa_citizen
 
 
     };
