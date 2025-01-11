@@ -4,11 +4,12 @@
   padding: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   width: calc(98% - 2rem); 
   min-width: 300px; 
-  min-height: 220px;
+  height: 245px; 
   border: 2px solid #000000;
+  overflow: hidden;
 }
 
 @media (max-width: 1180px) {
@@ -20,7 +21,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: 10vh;
+  height: 9vh;
+  padding: 10px;
+
   
 }
 
@@ -45,6 +48,8 @@
     display: flex;
     flex-direction: column;
     width: 100%; 
+
+
 }
 
 .title {
@@ -56,16 +61,18 @@
   word-wrap: break-word; 
   white-space: normal;
   overflow-wrap: break-word; 
- line-height: 1; 
+  line-height: 1; 
   display: -webkit-box; 
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; 
+  line-clamp: 2;
+  box-orient: vertical;
   overflow: hidden; 
   text-overflow: ellipsis;
 }
 
 .companyName {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #6B6969;
     margin-top: 2px;
     font-weight: 600;
@@ -74,8 +81,19 @@
 
 .postedDays {
     color: #6b33e5; 
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    margin-bottom: 0px;
+  
 }
+
+.statusCont{
+
+  margin-top: 0px;
+
+  display: flex;
+}
+
+
 
 .additionalInfo {
     display: flex;
@@ -93,7 +111,12 @@
     display: flex;
     align-items: center;
     row-gap: 5px;
-    column-gap: 10px;
+    column-gap: 7px;
+}
+
+
+.info2{
+  color: #6B1ED8;
 }
 
 .details {

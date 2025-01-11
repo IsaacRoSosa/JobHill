@@ -16,7 +16,9 @@ export async function GET(request) {
       categories,
       created_at,
       application_link,
-      companies (id, name, logo_url)
+      companies (id, name, logo_url),
+      not_offer_sponsor,
+      requires_usa_citizen
     `)
     .eq('status', 'Open')
     .order('created_at', { ascending: false })
@@ -62,6 +64,10 @@ export async function GET(request) {
       period: job.period,
       categories: job.categories.join(', '),
       application_link: job.application_link,
+      not_offer_sponsor: job.not_offer_sponsor,
+      requires_usa_citizen: job.requires_usa_citizen,
+
+
     };
   });
 
