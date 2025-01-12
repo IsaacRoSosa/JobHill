@@ -1,7 +1,7 @@
 "use client"; 
 
 import React, {memo} from 'react';
-import Image from 'next/image';
+import Image from 'next/image'; 
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
@@ -19,16 +19,20 @@ const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
           <img src={job.companyLogo} alt={`${job.companyName} logo`} className={styles.companyImage} />
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>{job.title}</h2>
-            <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span>
-            <div className={styles.statusCont}>
-              {job.requires_usa_citizen == 1 && (
-                <Image src="/Images/jobCard/usa.png" alt="Usa Citizenship Required" width={25} height={25} className={styles.status}/>
-              )}
-              {job.not_offer_sponsor == 1 && (
-                <Image src="/Images/jobCard/notSponsors.png" alt="Does NOT offer Sponsor" width={27} height={27} className={styles.status} />
-              )}
-
-            </div></p>
+            <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span></p>
+          
+           {(job.requires_usa_citizen == 1 || job.not_offer_sponsor == 1) && (
+                   <div className={styles.statusCont}>
+                   {job.requires_usa_citizen == 1 && (
+                     <Image src="/Images/jobCard/usa.png" alt="Usa Citizenship Required" width={25} height={25} className={styles.status}/>
+                   )}
+                   {job.not_offer_sponsor == 1 && (
+                     <Image src="/Images/jobCard/notSponsors.png" alt="Does NOT offer Sponsor" width={27} height={27} className={styles.status} />
+                   )}
+     
+                 </div>
+           )}
+       
             
           </div> 
         </div>
