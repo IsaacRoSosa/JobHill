@@ -264,8 +264,12 @@ export default function JobFetcher() {
   const onApplicationHide = async (jobId) => {
 
      // Remove hidden job from the visible list
-     setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
-     setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
+     setTimeout(() => {
+      setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+      setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
+
+     }, 3000)
+   
 
      setHiddenJobs((prevHiddenJobs) => [...prevHiddenJobs, jobId]);
 
@@ -460,7 +464,7 @@ export default function JobFetcher() {
     setTimeout(() => {
       setJobs((prevJobs) => prevJobs.filter(job => job.job_id !== jobId));
       setAllJobs((prevAllJobs) => prevAllJobs.filter(job => job.job_id !== jobId));
-    }, 3000); 
+    }, 2200); 
   };
 
   const hideJobFromList = (jobId) => {

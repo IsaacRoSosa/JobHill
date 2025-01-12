@@ -10,6 +10,12 @@
   height: 245px; 
   border: 2px solid #000000;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 2.2s ease-in-out; 
+}
+
+.fadeOut {
+  opacity: 0;
 }
 
 .cardInfo {

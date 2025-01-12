@@ -1,12 +1,10 @@
 "use client";
 import Image from 'next/image';
-
-
 import { createClient } from "/utils/supabase/client";
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/jobCard.module.css";
 
-function HideApplication({ job, onApplicationHide }) {
+function HideApplication({ job, onConfirmHide }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
   const [dontShowConfHide, setDontShowConfHide] = useState(false); 
@@ -16,7 +14,6 @@ function HideApplication({ job, onApplicationHide }) {
   useEffect(() => {
     const storedPreference = localStorage.getItem("dont_show_conf_hide");
     if (storedPreference) {
-
       setDontShowConfHide(JSON.parse(storedPreference));
     }
   }, []);
@@ -26,7 +23,7 @@ function HideApplication({ job, onApplicationHide }) {
     if (alertMessage) {
       timer = setTimeout(() => {
         setAlertMessage(null);
-      }, 2700); 
+      }, 2200); 
     }
     return () => clearTimeout(timer); 
   }, [alertMessage]);
@@ -58,7 +55,7 @@ function HideApplication({ job, onApplicationHide }) {
         return;
       }
 
-     
+      setAlertMessage(`Job "${job.title}" has been hidden.`);
       const updatedHiddenJobs = [...hiddenJobs, job.job_id];
 
       const { error: updateError } = await supabase
@@ -72,13 +69,15 @@ function HideApplication({ job, onApplicationHide }) {
         return;
       }
 
-      setAlertMessage(`Job "${job.title}" has been hidden.`);
  
       
       if (typeof onApplicationHide === "function") {
+        
         onApplicationHide(job.job_id);
-      }
+        setAlertMessage(`Job "${job.title}" has been hidden.`);
 
+      }
+      onConfirmHide();  
       setIsModalOpen(false);
     } catch (err) {
       console.error("Error hiding job:", err);

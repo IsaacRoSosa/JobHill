@@ -71,6 +71,7 @@ function AddApplicationButton({ job, onApplicationSuccess }) {
       setAlertMessage(`Application added for job: ${job.title}`);
     }
 
+    
     setIsModalOpen(false);
   };
 
