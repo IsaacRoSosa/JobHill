@@ -138,6 +138,7 @@
   font-weight: bold;
   transition: 0.4s;
 
+
 }
 .applyButton {
     background-color: #4A4A4A; 
@@ -146,16 +147,21 @@
 
 .addButton {
     background-color: #7B3EAB;
-    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem); /* Adjust font size dynamically */
+    width: fit-content;
+    padding: 10px;
+   
+
 }
 
 .applyButton:hover, .addButton:hover, .hideButton:hover {
     transform: scale(1.1);
 }
 
-.hideButton:hover{
-  border: #6B1ED8 1px dotted;
-}
 
 .halfs {
     display: flex;
@@ -378,7 +384,4 @@
     .card{
       min-height: 180px;
     }
-
-
-
   }
