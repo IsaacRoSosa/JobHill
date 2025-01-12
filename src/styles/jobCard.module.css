@@ -22,8 +22,8 @@
 
 .information {
   display: grid;
-  
-  
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto); 
   gap: 10px;
   padding: 10px;  
   height: 23%;
@@ -41,7 +41,6 @@
     gap: 7px;
     margin: 0;
     height: 40%;
-    background-color: #7B3EAB;
     width: 100%;
 }
 
@@ -128,7 +127,6 @@
 }
 
 .statusCont{
-  background-color: #000000;
   display: flex;
 }
 

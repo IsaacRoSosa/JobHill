@@ -20,7 +20,7 @@ const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>{job.title}</h2>
             <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span></p>
-          
+          {/* 
            {(job.requires_usa_citizen == 1 || job.not_offer_sponsor == 1) && (
                    <div className={styles.statusCont}>
                    {job.requires_usa_citizen == 1 && (
@@ -32,9 +32,12 @@ const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
      
                  </div>
            )}
+              */}
        
+
             
           </div> 
+
         </div>
  
         <div className={styles.information}>
@@ -51,6 +54,17 @@ const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
           {job.categories && (
             <p className={styles.info}><Image src="/Images/jobCard/category.png" alt="Category" width={18} height={18} /> {job.categories}</p>
           )}
+          {(job.requires_usa_citizen == 1 || job.not_offer_sponsor == 1) && (
+                   <div className={styles.statusCont}>
+                   {job.requires_usa_citizen == 1 && (
+                     <Image src="/Images/jobCard/usa.png" alt="Usa Citizenship Required" width={25} height={25} className={styles.status}/>
+                   )}
+                   {job.not_offer_sponsor == 1 && (
+                     <Image src="/Images/jobCard/notSponsors.png" alt="Does NOT offer Sponsor" width={25} height={25} className={styles.status} />
+                   )}
+     
+                 </div>
+           )}
         </div>
 
         <div className={styles.actions}>
