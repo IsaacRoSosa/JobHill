@@ -60,6 +60,7 @@ function HideApplication({ job, onApplicationHide }) {
 
      
       const updatedHiddenJobs = [...hiddenJobs, job.job_id];
+
       const { error: updateError } = await supabase
         .from("user_preferences")
         .update({ hidden_jobs: updatedHiddenJobs })
@@ -72,10 +73,10 @@ function HideApplication({ job, onApplicationHide }) {
       }
 
       setAlertMessage(`Job "${job.title}" has been hidden.`);
-
+ 
       
       if (typeof onApplicationHide === "function") {
-        onApplicationHide();
+        onApplicationHide(job.job_id);
       }
 
       setIsModalOpen(false);

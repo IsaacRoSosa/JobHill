@@ -8,7 +8,7 @@ import AddApplicationButton from '@/components/JobCardActions/AddApplicationButt
 import HideApplication from '@/components/JobCardActions/HideApplication';
 
 const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
-
+ 
   const modalityIcon = job.modality === "On Site" ? "/Images/jobCard/office.png" : "/Images/jobCard/remote.png";
   const hasPeriod = job.period && job.period.trim() !== "";
 

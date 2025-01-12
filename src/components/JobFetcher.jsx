@@ -130,6 +130,8 @@ export default function JobFetcher() {
   const [companies, setCompanies] = useState([]);
   const [filteredCompanies, setFilteredCompanies] = useState([]);
   const [hiddenJobs, setHiddenJobs] = useState([]); 
+
+
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [showCompanies, setShowCompanies] = useState(false);
   const [showFilters, setShowFilters] = useState(true);
@@ -259,34 +261,60 @@ export default function JobFetcher() {
     fetchJobs();
   }, []);
 
-  const onApplicationHide = (jobId) => {
-    // Remove hidden job from the visible list
-    setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
-    setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
+  const onApplicationHide = async (jobId) => {
 
-    // Add job to hidden list
-    setHiddenJobs((prevHiddenJobs) => [...prevHiddenJobs, jobId]);
+     // Remove hidden job from the visible list
+     setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+     setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
 
-    // Optional: Update preferences in Supabase
-    const updateHiddenJobs = async () => {
+     setHiddenJobs((prevHiddenJobs) => [...prevHiddenJobs, jobId]);
+
+ 
+
+
+    try {
       const user = await supabase.auth.getUser();
-      if (!user?.data?.user) return;
-
-      const { error } = await supabase
-        .from("user_preferences")
-        .update({
-          hidden_jobs: [...hiddenJobs, jobId],
-        })
-        .eq("user_id", user.data.user.id);
-
-      if (error) {
-        console.error("Error updating hidden jobs:", error);
+      if (!user?.data?.user){
+        console.error("No authenticated user.");
+      return;
       }
-    };
-
+  
+    // 1) Update user_preferences in Supabase 
+    const { data: preferences, error: fetchError } = await supabase
+        .from("user_preferences")
+        .select("hidden_jobs")
+        .eq("user_id", user.data.user.id)
+        .single();
+  
+      if (fetchError) {
+        console.error("Error fetching hidden jobs:", fetchError);
+        return;
+      }
+  
+      // Merge the new hidden job with the current hidden jobs
+      const hiddenJobsFromDB = preferences?.hidden_jobs || [];
+      if (hiddenJobsFromDB.includes(jobId)) {
+        return;
+      }
+  
+      const updatedHiddenJobs = [...hiddenJobsFromDB, jobId];
+      const { error: updateError } = await supabase
+        .from("user_preferences")
+        .update({ hidden_jobs: updatedHiddenJobs })
+        .eq("user_id", user.data.user.id);
+  
+      if (updateError) {
+        console.error("Error updating hidden jobs:", updateError);
+        return;
+      } 
+  
+    } catch (error) {
+      console.error("Error hiding job:", error);
+    }
     updateHiddenJobs();
-  };
 
+  };
+  
 
 
   const applyFilters = () => {
@@ -356,6 +384,7 @@ export default function JobFetcher() {
   useEffect(() => {
     applyFilters();
   }, [filters, selectedCompany]);
+
 
 
 
@@ -432,6 +461,14 @@ export default function JobFetcher() {
       setJobs((prevJobs) => prevJobs.filter(job => job.job_id !== jobId));
       setAllJobs((prevAllJobs) => prevAllJobs.filter(job => job.job_id !== jobId));
     }, 3000); 
+  };
+
+  const hideJobFromList = (jobId) => {
+
+    setHiddenJobs((prevHiddenJobs) => [...prevHiddenJobs, jobId]);
+    setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+    setAllJobs((prevAllJobs) => prevAllJobs.filter((job) => job.job_id !== jobId));
+
   };
   
 
