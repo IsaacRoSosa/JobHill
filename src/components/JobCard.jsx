@@ -20,7 +20,7 @@ const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>{job.title}</h2>
             <p className={styles.companyName}>{job.companyName} - <span className={styles.postedDays}>{job.postedDays}</span></p>
-          {/* 
+          {/* display sponsor status in header, will decide 
            {(job.requires_usa_citizen == 1 || job.not_offer_sponsor == 1) && (
                    <div className={styles.statusCont}>
                    {job.requires_usa_citizen == 1 && (

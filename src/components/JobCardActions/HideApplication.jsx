@@ -16,6 +16,7 @@ function HideApplication({ job, onApplicationHide }) {
   useEffect(() => {
     const storedPreference = localStorage.getItem("dont_show_conf_hide");
     if (storedPreference) {
+
       setDontShowConfHide(JSON.parse(storedPreference));
     }
   }, []);
@@ -105,17 +106,17 @@ function HideApplication({ job, onApplicationHide }) {
       </button>
 
       {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
+        <div className={styles.modalOverlay2}>
+          <div className={styles.modal2}>
             <h3>
               Hide {job.title} - {job.role} Application?
             </h3>
             <div className={styles.actions}>
-              <button className={styles.confirmButton} onClick={handleHideJob}>
+              <button className={styles.confirmButton2} onClick={handleHideJob}>
                 Yes
               </button>
               <button
-                className={styles.cancelButton}
+                className={styles.cancelButton2}
                 onClick={() => setIsModalOpen(false)}
               >
                 No
