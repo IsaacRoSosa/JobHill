@@ -227,15 +227,15 @@ export default function JobFetcher() {
           hiddenJobsFromPreferences = preferences?.hidden_jobs || [];
         }
       }
-
-      const filteredJobs = jobsData.filter(
+      //Filter hidden Jobs
+      const visibleJobs = jobsData.filter(
         (job) => !hiddenJobsFromPreferences.includes(job.job_id)
       );
+  
 
-      setAllJobs(filteredJobs);
-      setJobs(filteredJobs);
 
-      const groupedCompanies = jobsData.reduce((acc, job) => {
+
+      const groupedCompanies = visibleJobs.reduce((acc, job) => {
         if (!acc[job.companyName]) {
           acc[job.companyName] = { 
             companyId: job.companyId, 
@@ -248,6 +248,9 @@ export default function JobFetcher() {
         return acc;
       }, {});
       const companiesArray = Object.values(groupedCompanies);
+
+      setAllJobs(visibleJobs);
+      setJobs(visibleJobs);
       setCompanies(companiesArray);
       setFilteredCompanies(companiesArray);
       setLoading(false);
@@ -322,45 +325,45 @@ export default function JobFetcher() {
 
 
   const applyFilters = () => {
-    let filteredJobs = [...allJobs];
+    let visibleJobs = [...allJobs];
 
     if (selectedCompany) {
-      filteredJobs = filteredJobs.filter(job => job.companyId === selectedCompany);
+      visibleJobs = visibleJobs.filter(job => job.companyId === selectedCompany);
     }
 
     // Filter by company
     if (filters.company) {
-      filteredJobs = filteredJobs.filter(job =>
+      visibleJobs = visibleJobs.filter(job =>
         job.companyName.toLowerCase().includes(filters.company.toLowerCase())
       );
     }
 
     // Filter by role
     if (filters.role) {
-      filteredJobs = filteredJobs.filter(job =>
+      visibleJobs = visibleJobs.filter(job =>
         job.title.toLowerCase().includes(filters.role.toLowerCase())
       );
     }
 
     // Filter by modality
     if (filters.modality.value !== 'All') {
-      filteredJobs = filteredJobs.filter(job =>
+      visibleJobs = visibleJobs.filter(job =>
         job.modality === filters.modality.value
       );
     }
     //Filter by Sponsorshio
     if (filters.notOfferSponsor) {
-      filteredJobs = filteredJobs.filter(job => job.notOfferSponsor === 1);
+      visibleJobs = visibleJobs.filter(job => job.notOfferSponsor === 1);
     }  
     
     if (filters.requiresUsaCitizen) {
-      filteredJobs = filteredJobs.filter(job => job.requiresUsaCitizen === 1);
+      visibleJobs = visibleJobs.filter(job => job.requiresUsaCitizen === 1);
     }
 
     // Filter by categories
     if (filters.categories.length > 0) {
       const selectedCategories = filters.categories.map(cat => cat.value);
-      filteredJobs = filteredJobs.filter(job =>
+      visibleJobs = visibleJobs.filter(job =>
         selectedCategories.some(cat => job.categories.includes(cat))
       );
     }
@@ -368,13 +371,13 @@ export default function JobFetcher() {
     // Filter by period
     if (filters.period.length > 0) {
       const selectedPeriods = filters.period.map(period => period.value);
-      filteredJobs = filteredJobs.filter(job =>
+      visibleJobs = visibleJobs.filter(job =>
         selectedPeriods.includes(job.period)
       );
     }
 
     // Sort by date
-    filteredJobs = filteredJobs.sort((a, b) => {
+    visibleJobs = visibleJobs.sort((a, b) => {
       if (filters.orderBy.value === 'Ascending') {
         return a.daysAgo - b.daysAgo;
       } else {
@@ -382,7 +385,7 @@ export default function JobFetcher() {
       }
     });
 
-    setJobs(filteredJobs);
+    setJobs(visibleJobs);
   };
 
   useEffect(() => {
