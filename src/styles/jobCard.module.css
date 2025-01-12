@@ -12,11 +12,6 @@
   overflow: hidden;
 }
 
-@media (max-width: 1180px) {
-  
-}
-
-
 .information {
   display: flex;
   flex-wrap: wrap;
@@ -30,7 +25,6 @@
     border-radius: 5px;
     width: 80px;
     height: 80px;
-
 }
 .header {
     display: flex;
@@ -81,12 +75,16 @@
     color: #6b33e5; 
     font-size: 1.05rem;
     margin-bottom: 0px;
-}
+} 
 
 .hideButton{
-  background-color: #000000;
-  width: 50px;
-  
+  background-color: #a7a7a792; 
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .statusCont{
@@ -131,33 +129,32 @@
 }
 
 
+.addButton, .applyButton{
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.4s;
 
+}
 .applyButton {
     background-color: #4A4A4A; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.4s;
     font-size: 1.2rem;
 }
 
 .addButton {
     background-color: #7B3EAB;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.4s;
     font-size: 1.3rem;
 }
 
-.applyButton:hover, .addButton:hover {
+.applyButton:hover, .addButton:hover, .hideButton:hover {
     transform: scale(1.1);
+}
+
+.hideButton:hover{
+  border: #6B1ED8 1px dotted;
 }
 
 .halfs {

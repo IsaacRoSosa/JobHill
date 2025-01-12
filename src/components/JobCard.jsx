@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from '@/styles/jobCard.module.css';
 import ApplyButton from '@/components/JobCardActions/ApplyButton';
 import AddApplicationButton from '@/components/JobCardActions/AddApplicationButton';
-import HideApplication from '@/components/JobCardActions/AddApplicationButton';
+import HideApplication from '@/components/JobCardActions/HideApplication';
 
 const JobCard = memo(({ job, onApplicationSuccess, onApplicationHide }) => {
 

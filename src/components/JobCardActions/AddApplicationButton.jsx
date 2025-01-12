@@ -119,7 +119,7 @@ function AddApplicationButton({ job, onApplicationSuccess }) {
                   Add Application
                 </button>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
       )}

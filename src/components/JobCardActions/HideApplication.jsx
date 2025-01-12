@@ -1,10 +1,12 @@
 "use client";
+import Image from 'next/image';
+
 
 import { createClient } from "/utils/supabase/client";
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/jobCard.module.css";
 
-function HideJob({ job, onApplicationHide }) {
+function HideApplication({ job, onApplicationHide }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
   const [dontShowConfHide, setDontShowConfHide] = useState(false); 
@@ -99,7 +101,7 @@ function HideJob({ job, onApplicationHide }) {
   return (
     <>
       <button className={styles.hideButton} onClick={handleHideButtonClick}>
-        HIDE APP
+        <Image src="/Images/jobCard/hide.png" alt="Usa Citizenship Required" width={25} height={25} className={styles.status}/>
       </button>
 
       {isModalOpen && (
@@ -138,4 +140,4 @@ function HideJob({ job, onApplicationHide }) {
   );
 }
 
-export default HideJob;
+export default HideApplication;
