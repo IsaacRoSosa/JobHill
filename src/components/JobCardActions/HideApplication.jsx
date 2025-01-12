@@ -102,7 +102,7 @@ function HideApplication({ job, onConfirmHide }) {
   return (
     <>
       <button className={styles.hideButton} onClick={handleHideButtonClick}>
-        <Image src="/Images/jobCard/hide.png" alt="Usa Citizenship Required" width={25} height={25} className={styles.status}/>
+        <Image src="/Images/jobCard/hide.png" alt="Hide job Offer" width={25} height={25} className={styles.status}/>
       </button>
 
       {isModalOpen && (
@@ -129,7 +129,7 @@ function HideApplication({ job, onConfirmHide }) {
                   checked={dontShowConfHide}
                   onChange={handleCheckboxChange}
                 />
-                Don't show this confirmation again
+                Do not show this confirmation again
               </label>
             </div>
           </div>
